@@ -1,0 +1,101 @@
+---
+abstract: 'Command-line driver for Pinto'
+author:
+  - 'Jeffrey Thalhammer <jeff@imaginative-software.com>'
+build_requires:
+  File::Find: 0
+  File::Temp: 0
+  Module::Build: 0.3601
+  Test::More: 0
+configure_requires:
+  Module::Build: 0.3601
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.300010, CPAN::Meta::Converter version 2.120630'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: App-Pinto
+no_index:
+  directory:
+    - t
+    - xt
+    - examples
+    - corpus
+provides:
+  App::Pinto:
+    file: lib/App/Pinto.pm
+    version: 0.040_02
+  App::Pinto::Command:
+    file: lib/App/Pinto/Command.pm
+    version: 0.040_02
+  App::Pinto::Command::add:
+    file: lib/App/Pinto/Command/add.pm
+    version: 0.040_02
+  App::Pinto::Command::copy:
+    file: lib/App/Pinto/Command/copy.pm
+    version: 0.040_02
+  App::Pinto::Command::edit:
+    file: lib/App/Pinto/Command/edit.pm
+    version: 0.040_02
+  App::Pinto::Command::init:
+    file: lib/App/Pinto/Command/init.pm
+    version: 0.040_02
+  App::Pinto::Command::install:
+    file: lib/App/Pinto/Command/install.pm
+    version: 0.040_02
+  App::Pinto::Command::list:
+    file: lib/App/Pinto/Command/list.pm
+    version: 0.040_02
+  App::Pinto::Command::manual:
+    file: lib/App/Pinto/Command/manual.pm
+    version: 0.040_02
+  App::Pinto::Command::merge:
+    file: lib/App/Pinto/Command/merge.pm
+    version: 0.040_02
+  App::Pinto::Command::new:
+    file: lib/App/Pinto/Command/new.pm
+    version: 0.040_02
+  App::Pinto::Command::nop:
+    file: lib/App/Pinto/Command/nop.pm
+    version: 0.040_02
+  App::Pinto::Command::pin:
+    file: lib/App/Pinto/Command/pin.pm
+    version: 0.040_02
+  App::Pinto::Command::props:
+    file: lib/App/Pinto/Command/props.pm
+    version: 0.040_02
+  App::Pinto::Command::pull:
+    file: lib/App/Pinto/Command/pull.pm
+    version: 0.040_02
+  App::Pinto::Command::stacks:
+    file: lib/App/Pinto/Command/stacks.pm
+    version: 0.040_02
+  App::Pinto::Command::statistics:
+    file: lib/App/Pinto/Command/statistics.pm
+    version: 0.040_02
+  App::Pinto::Command::unpin:
+    file: lib/App/Pinto/Command/unpin.pm
+    version: 0.040_02
+  App::Pinto::Command::verify:
+    file: lib/App/Pinto/Command/verify.pm
+    version: 0.040_02
+  App::Pinto::Command::version:
+    file: lib/App/Pinto/Command/version.pm
+    version: 0.040_02
+requires:
+  App::Cmd::Setup: 0
+  Class::Load: 0
+  List::Util: 0
+  Log::Dispatch::Screen: 0
+  Log::Dispatch::Screen::Color: 0
+  Pinto::Constants: 0
+  Pod::Usage: 0
+  base: 0
+  perl: 5.006
+  strict: 0
+  warnings: 0
+resources:
+  bugtracker: https://github.com/thaljef/App-Pinto/issues
+  repository: git://github.com/thaljef/App-Pinto.git
+version: 0.040_02
