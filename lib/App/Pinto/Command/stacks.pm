@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -21,21 +21,6 @@ sub opt_spec {
     return (
         [ 'format=s' => 'Format of the listing' ],
     );
-}
-
-#------------------------------------------------------------------------------
-
-sub usage_desc {
-    my ($self) = @_;
-
-    my ($command) = $self->command_names;
-
-    my $usage =  <<"END_USAGE";
-%c --root=REPOSITORY_ROOT $command [OPTIONS]
-END_USAGE
-
-    chomp $usage;
-    return $usage;
 }
 
 #------------------------------------------------------------------------------
@@ -67,7 +52,7 @@ App::Pinto::Command::stacks - show available stacks
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
 
 =head1 SYNOPSIS
 

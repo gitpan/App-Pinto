@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -24,22 +24,6 @@ sub opt_spec {
         [ 'pin'         => 'Pin all the packages to the stack' ],
         [ 'stack|s=s'   => 'Put packages into this stack'      ],
     );
-}
-
-#------------------------------------------------------------------------------
-
-sub usage_desc {
-    my ($self) = @_;
-
-    my ($command) = $self->command_names();
-
-    my $usage =  <<"END_USAGE";
-%c --root=REPOSITORY_ROOT $command [OPTIONS] TARGET ...
-%c --root=REPOSITORY_ROOT $command [OPTIONS] < LIST_OF_TARGETS
-END_USAGE
-
-    chomp $usage;
-    return $usage;
 }
 
 #------------------------------------------------------------------------------
@@ -66,7 +50,7 @@ App::Pinto::Command::pull - pull archives from upstream repositories
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
 
 =head1 SYNOPSIS
 
@@ -96,7 +80,7 @@ specified as packages (with or without a minimum version number) or
 a distributions.  For example:
 
   Foo::Bar                                 # Pulls any version of Foo::Bar
-  Foo::Bar-1.2                             # Pulls Foo::Bar 1.2 or higher
+  Foo::Bar~1.2                             # Pulls Foo::Bar 1.2 or higher
   SHAKESPEARE/King-Lear-1.2.tar.gz         # Pulls a specific distribuion
   SHAKESPEARE/tragedies/Hamlet-4.2.tar.gz  # Ditto, but from a subdirectory
 

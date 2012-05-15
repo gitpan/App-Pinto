@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -25,22 +25,6 @@ sub opt_spec {
         [ 'pin'         => 'Pin packages to the stack'         ],
         [ 'stack|s=s'   => 'Put packages into this stack'      ],
     );
-}
-
-#------------------------------------------------------------------------------
-
-sub usage_desc {
-    my ($self) = @_;
-
-    my ($command) = $self->command_names();
-
-    my $usage =  <<"END_USAGE";
-%c --root=REPOSITORY_ROOT $command [OPTIONS] ARCHIVE_FILE ...
-%c --root=REPOSITORY_ROOT $command [OPTIONS] < LIST_OF_ARCHIVE_FILES
-END_USAGE
-
-    chomp $usage;
-    return $usage;
 }
 
 #------------------------------------------------------------------------------
@@ -67,7 +51,7 @@ App::Pinto::Command::add - add local archives to the repository
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
 
 =head1 SYNOPSIS
 
@@ -97,7 +81,7 @@ or ';') will be ignored.
 
 =over 4
 
-=item --author=NAME
+=item --author NAME
 
 Set the identity of the distribution author.  The C<NAME> must be
 alphanumeric characters (no spaces) and will be forced to uppercase.
@@ -108,8 +92,8 @@ username.
 =item --dryrun
 
 Go through all the motions, but do not actually commit any changes to
-the repository.  Use this option to see how upgrades would potentially
-impact the stack.
+the repository.  Use this option to see how operations would
+potentially impact the stack.
 
 =item --norecurse
 
@@ -124,7 +108,7 @@ prerequisites that are pulled in for this distribution.  However, you
 may pin them separately with the
 L<pin|App::Pinto::Command::pin> command, if you so desire.
 
-=item --stack=NAME
+=item --stack NAME
 
 Puts all the packages onto the stack with the given NAME.  Defaults
 to the name of whichever stack is currently marked as the default

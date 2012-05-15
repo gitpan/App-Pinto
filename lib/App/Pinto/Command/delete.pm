@@ -1,6 +1,6 @@
-# ABSTRACT: show stack properties
+# ABSTRACT: delete a stack
 
-package App::Pinto::Command::props;
+package App::Pinto::Command::delete;
 
 use strict;
 use warnings;
@@ -15,24 +15,15 @@ our $VERSION = '0.041'; # VERSION
 
 #------------------------------------------------------------------------------
 
-sub opt_spec {
-
-  return (
-      [ 'format=s' => 'Format specification (See POD for details)' ],
-  );
-}
+sub command_names { return qw(delete del rm) }
 
 #------------------------------------------------------------------------------
-
 
 sub validate_args {
     my ($self, $opts, $args) = @_;
 
-    $self->usage_error('Cannot specify multiple stacks')
-        if @{$args} > 1;
-
-    $opts->{format} = eval qq{"$opts->{format}"} ## no critic qw(StringyEval)
-        if $opts->{format};
+    $self->usage_error('Must specify exactly one stack')
+        if @{$args} != 1;
 
     return 1;
 }
@@ -42,9 +33,8 @@ sub validate_args {
 sub execute {
     my ($self, $opts, $args) = @_;
 
-    my $stack = $args->[0];
     my $result = $self->pinto->run($self->action_name, %{$opts},
-                                                       stack => $stack);
+                                                       stack => $args->[0]);
 
     return $result->exit_status;
 }
@@ -60,7 +50,7 @@ sub execute {
 
 =head1 NAME
 
-App::Pinto::Command::props - show stack properties
+App::Pinto::Command::delete - delete a stack
 
 =head1 VERSION
 
@@ -68,36 +58,27 @@ version 0.041
 
 =head1 SYNOPSIS
 
-  pinto --root=REPOSITORY_ROOT stack props [OPTIONS] STACK
+  pinto --root=REPOSITORY_ROOT delete [OPTIONS] STACK
 
 =head1 DESCRIPTION
 
-This command shows the properties of a stack.  See the
-L<edit|App::Pinto::Command::edit> command to change the
-properties.
+This command creates deletes a stack.  Only the stack itself is deleted
+-- all distributuions that were registered on the stack will remain in
+the repository.
+
+The stack that is currently marked as the default can never be
+deleted.  If you wish to delete it, you must first mark another stack
+as the default.
 
 =head1 COMMAND ARGUMENTS
 
-The argument is the name of the stack you wish to see the properties
-for.  If you do not specify a stack, it defaults to whichever stack is
-marked as the default.  Stack names must be alphanumeric (including "-"
-or "_") and will be forced to lowercase.
+The required argument is the name of the stack you wish to delete.
+Stack names must be alphanumeric (including "-" or "_") and will be
+forced to lowercase.
 
 =head1 COMMAND OPTIONS
 
-=over 4
-
-=item --format=FORMAT_SPECIFICATION
-
-Format the output using C<printf>-style placeholders.  Valid
-placeholders are:
-
-  Placeholder    Meaning
-  -----------------------------------------------------------------------------
-  %n             Property name
-  %v             Package value
-
-=back
+None.
 
 =head1 AUTHOR
 

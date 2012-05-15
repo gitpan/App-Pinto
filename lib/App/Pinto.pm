@@ -17,7 +17,7 @@ use App::Cmd::Setup -app;
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -43,9 +43,12 @@ sub pinto {
         my %global_options = %{ $self->global_options() };
 
         $global_options{root} ||= $ENV{PINTO_REPOSITORY_ROOT}
-            || $self->usage_error('Must specify a repository root directory');
+            || $self->usage_error('Must specify a repository root');
 
-        my $pinto_class = $self->pinto_class();
+        # TODO: Give helpful error message if the right backend
+        # is not installed.
+
+        my $pinto_class = $self->pinto_class($global_options{root});
         Class::Load::load_class($pinto_class);
 
         my $pinto = $pinto_class->new(%global_options);
@@ -53,6 +56,13 @@ sub pinto {
 
         $pinto;
     };
+}
+
+#------------------------------------------------------------------------------
+
+sub pinto_class {
+    my ($self, $root) = @_;
+    return $root =~ m{^http://}x ? 'Pinto::Remote' : 'Pinto';
 }
 
 #------------------------------------------------------------------------------
@@ -93,19 +103,13 @@ sub default_log_colors { return $PINTO_DEFAULT_LOG_COLORS }
 
 #------------------------------------------------------------------------------
 
-sub pinto_class { return 'Pinto' }
-
-#------------------------------------------------------------------------------
-
 1;
 
 
 
 =pod
 
-=for :stopwords Jeffrey Thalhammer Imaginative Software Systems cpan testmatrix url
-annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata
-placeholders metacpan
+=for :stopwords Jeffrey Thalhammer Imaginative Software Systems
 
 =head1 NAME
 
@@ -113,82 +117,33 @@ App::Pinto - Command-line driver for Pinto
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
+
+=head1 DESCRIPTION
+
+App::Pinto is the command-line driver for Pinto.  It is just a
+front-end.  To do anything useful, you'll also need to install one of
+the back-ends, which ship separately.  If you need to create
+repositories and/or work directly with repositories on the local disk,
+then install L<Pinto>.  If you already have a repository on a remote
+host that is running L<pintod>, then install L<Pinto::Remote>.  If
+you're not sure what you need, then install L<Task::Pinto> to get the
+whole kit.
 
 =head1 METHODS
 
-=head2 pinto()
+=head2 pinto
 
-Returns a reference to a L<Pinto> object that has been constructed for
-this application.
+Returns a reference to a L<Pinto> or L<Pinto::Remote> object that has
+been constructed for this application.
 
-=head1 SUPPORT
+=head1 SEE ALSO
 
-=head2 Perldoc
+L<Pinto::Manual> for general information on using Pinto.
 
-You can find documentation for this module with the perldoc command.
+L<pinto> to create and manage a Pinto repository.
 
-  perldoc App::Pinto
-
-=head2 Websites
-
-The following websites have more information about this module, and may be of help to you. As always,
-in addition to those websites please use your favorite search engine to discover more resources.
-
-=over 4
-
-=item *
-
-Search CPAN
-
-The default CPAN search engine, useful to view POD in HTML format.
-
-L<http://search.cpan.org/dist/App-Pinto>
-
-=item *
-
-CPAN Ratings
-
-The CPAN Ratings is a website that allows community ratings and reviews of Perl modules.
-
-L<http://cpanratings.perl.org/d/App-Pinto>
-
-=item *
-
-CPAN Testers
-
-The CPAN Testers is a network of smokers who run automated tests on uploaded CPAN distributions.
-
-L<http://www.cpantesters.org/distro/A/App-Pinto>
-
-=item *
-
-CPAN Testers Matrix
-
-The CPAN Testers Matrix is a website that provides a visual overview of the test results for a distribution on various Perls/platforms.
-
-L<http://matrix.cpantesters.org/?dist=App-Pinto>
-
-=item *
-
-CPAN Testers Dependencies
-
-The CPAN Testers Dependencies is a website that shows a chart of the test results of all dependencies for a distribution.
-
-L<http://deps.cpantesters.org/?module=App::Pinto>
-
-=back
-
-=head2 Bugs / Feature Requests
-
-L<https://github.com/thaljef/App-Pinto/issues>
-
-=head2 Source Code
-
-
-L<https://github.com/thaljef/App-Pinto>
-
-  git clone git://github.com/thaljef/App-Pinto.git
+L<pintod> to allow remote access to your Pinto repository.
 
 =head1 AUTHOR
 
@@ -205,3 +160,4 @@ the same terms as the Perl 5 programming language system itself.
 
 
 __END__
+

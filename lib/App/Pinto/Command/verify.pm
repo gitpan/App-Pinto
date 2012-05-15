@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ App::Pinto::Command::verify - report archives that are missing
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
 
 =head1 SYNOPSIS
 

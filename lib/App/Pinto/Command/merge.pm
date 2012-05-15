@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -31,21 +31,6 @@ sub validate_args {
         if @{$args} != 2;
 
     return 1;
-}
-
-#------------------------------------------------------------------------------
-
-sub usage_desc {
-    my ($self) = @_;
-
-    my ($command) = $self->command_names();
-
-    my $usage =  <<"END_USAGE";
-%c --root=REPOSITORY_ROOT $command [OPTIONS] FROM_STACK TO_STACK
-END_USAGE
-
-    chomp $usage;
-    return $usage;
 }
 
 #------------------------------------------------------------------------------
@@ -74,7 +59,7 @@ App::Pinto::Command::merge - merge one stack into another
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
 
 =head1 SYNOPSIS
 

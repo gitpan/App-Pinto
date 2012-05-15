@@ -1,9 +1,12 @@
-package App::Pinto::Command;
-
 # ABSTRACT: Base class for pinto commands
+
+package App::Pinto::Command;
 
 use strict;
 use warnings;
+
+use IO::String;
+use Pod::Usage qw(pod2usage);
 
 #-----------------------------------------------------------------------------
 
@@ -11,16 +14,21 @@ use App::Cmd::Setup -command;
 
 #-----------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #-----------------------------------------------------------------------------
 
 sub usage_desc {
-    my ($self) = @_;
+    my ($class_or_self, @args) = @_;
 
-    my ($command) = $self->command_names;
+    my $class  = ref $class_or_self || $class_or_self;
+    my $file   = $class . '.pm'; $file =~ s{::}{/}xg;
+    my $path   = $INC{$file} or return;
+    my $handle = IO::String->new;
 
-    return "%c --root=REPOSITORY_ROOT $command [OPTIONS] [ARGS]"
+    pod2usage(-output => $handle, -input => $path, -exitval => 'NOEXIT');
+
+    return ${ $handle->string_ref };
 }
 
 #-----------------------------------------------------------------------------
@@ -128,7 +136,7 @@ App::Pinto::Command - Base class for pinto commands
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
 
 =head1 AUTHOR
 

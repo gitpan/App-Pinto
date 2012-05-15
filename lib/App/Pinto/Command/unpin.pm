@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -19,24 +19,9 @@ sub opt_spec {
     my ($self, $app) = @_;
 
     return (
+        [ 'dryrun'    => 'Do not commit any changes'            ],
         [ 'stack|s=s' => 'Stack from which to unpin the target' ],
     );
-}
-
-#------------------------------------------------------------------------------
-
-sub usage_desc {
-    my ($self) = @_;
-
-    my ($command) = $self->command_names();
-
-    my $usage =  <<"END_USAGE";
-%c --root=REPOSITORY_ROOT $command [OPTIONS] TARGET ...
-%c --root=REPOSITORY_ROOT $command [OPTIONS] < LIST_OF_TARGETS
-END_USAGE
-
-    chomp $usage;
-    return $usage;
 }
 
 #------------------------------------------------------------------------------
@@ -63,7 +48,7 @@ App::Pinto::Command::unpin - free packages that have been pinned
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
 
 =head1 SYNOPSIS
 
@@ -98,6 +83,12 @@ or ';') will be ignored.
 =head1 COMMAND OPTIONS
 
 =over 4
+
+=item --dryrun
+
+Go through all the motions, but do not actually commit any changes to
+the repository.  Use this option to see how upgrades would potentially
+impact the stack.
 
 =item --stack=NAME
 

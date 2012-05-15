@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -20,6 +20,7 @@ sub opt_spec {
 
     return (
         [ 'description|d=s' => 'Brief description of the stack' ],
+        [ 'dryrun'          => 'Do not commit any changes'      ],
     );
 
 
@@ -34,21 +35,6 @@ sub validate_args {
         if @{$args} != 1;
 
     return 1;
-}
-
-#------------------------------------------------------------------------------
-
-sub usage_desc {
-    my ($self) = @_;
-
-    my ($command) = $self->command_names();
-
-    my $usage =  <<"END_USAGE";
-%c --root=REPOSITORY_ROOT $command [OPTIONS] STACK
-END_USAGE
-
-    chomp $usage;
-    return $usage;
 }
 
 #------------------------------------------------------------------------------
@@ -77,11 +63,11 @@ App::Pinto::Command::new - create a new empty stack
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
 
 =head1 SYNOPSIS
 
-  pinto --root=REPOSITORY_ROOT stack create [OPTIONS] STACK
+  pinto --root=REPOSITORY_ROOT new [OPTIONS] STACK
 
 =head1 DESCRIPTION
 
@@ -102,9 +88,15 @@ forced to lowercase.
 
 =over 4
 
-=item --description=TEXT
+=item --description TEXT
 
 Annotates this stack with a description of its purpose.
+
+=item --dryrun
+
+Go through all the motions, but do not actually commit any changes to
+the repository.  Use this option to see how operations would
+potentially impact the stack.
 
 =back
 

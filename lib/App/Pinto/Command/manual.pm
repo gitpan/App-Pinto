@@ -11,23 +11,13 @@ use base qw(App::Pinto::Command);
 
 #-------------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #-------------------------------------------------------------------------------
 
 sub command_names { return qw( manual man --man ) }
 
 #-----------------------------------------------------------------------------
-
-sub usage_desc {
-    my ($self) = @_;
-
-    my ($command) = $self->command_names();
-
-    return "%c $command COMMAND"
-}
-
-#-------------------------------------------------------------------------------
 
 sub validate_args {
     my ($self, $opts, $args) = @_;
@@ -72,7 +62,7 @@ App::Pinto::Command::manual - show the full manual for a command
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
 
 =head1 AUTHOR
 

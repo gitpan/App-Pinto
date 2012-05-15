@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -19,27 +19,30 @@ sub opt_spec {
     my ($self, $app) = @_;
 
     return (
-        [ 'cpanm_exe|cpanm=s'  => 'Path to the cpanm executable'      ],
-        [ 'cpanm_options|o:s%' => 'name=value pairs of cpanm options' ],
-        [ 'stack|s=s'          => 'Use the index for this stack'      ],
+        [ 'cpanm-exe|cpanm=s'       => 'Path to the cpanm executable'                 ],
+        [ 'cpanm-options|o:s%'      => 'name=value pairs of cpanm options'            ],
+        [ 'local-lib|l=s'           => 'install into a local lib directory'           ],
+        [ 'local-lib-contained|L=s' => 'install into a contained local lib directory' ],
+        [ 'pull'                    => 'pull missing prereqs onto the stack first'    ],
+        [ 'stack|s=s'               => 'Use the index for this stack'                 ],
 
     );
 }
 
 #------------------------------------------------------------------------------
 
-sub usage_desc {
-    my ($self) = @_;
+sub validate_args {
+    my ($self, $opts, $args) = @_;
 
-    my ($command) = $self->command_names;
+    my $local_lib = delete $opts->{local_lib};
+    $opts->{cpanm_options}->{'local-lib'} = $local_lib
+        if $local_lib;
 
-    my $usage =  <<"END_USAGE";
-%c --root=REPOSITORY_ROOT $command [OPTIONS] TARGET...
-%c --root=REPOSITORY_ROOT $command [OPTIONS] < LIST_OF_TARGETS
-END_USAGE
+    my $local_lib_contained = delete $opts->{local_lib_contained};
+    $opts->{cpanm_options}->{'local-lib-contained'} = $local_lib_contained
+        if $local_lib_contained;
 
-    chomp $usage;
-    return $usage;
+    return 1;
 }
 
 #------------------------------------------------------------------------------
@@ -65,7 +68,7 @@ App::Pinto::Command::install - install stuff from the repository
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
 
 =head1 SYNOPSIS
 
@@ -78,7 +81,13 @@ version 0.040_02
 
 Installs packages from the repository into your environment.  This is
 just a thin wrapper around L<cpanm> that is wired to fetch everything
-from the Pinto repository, rather than a public CPAN mirror.
+from the Pinto repository, rather than a public CPAN mirror.  If the
+the C<--pull> option is given, all prerequisites (including the
+targets themselves) will be pulled onto the stack before attempting to
+install them.  If the repository does not contain a prerequisite, it
+will be pulled from one of the upstream repositories.  If any
+prerequisite cannot be pulled because it does not exist or blocked by
+a pin, then the installation will not proceed.
 
 =head1 COMMAND ARGUMENTS
 
@@ -95,15 +104,15 @@ or ';') will be ignored.
 
 =over 4
 
-=item --cpanm_exe=PATH
+=item --cpanm-exe PATH
 
-=item --cpanm=PATH
+=item --cpanm PATH
 
 Sets the path to the L<cpanm> executable.  If not specified, the
 C<PATH> will be searched for the executable.  At present, cpanm
 version 1.500 or newer is required.
 
-=item --cpanm_options NAME=VALUE
+=item --cpanm-options NAME=VALUE
 
 =item -o NAME=VALUE
 
@@ -111,6 +120,30 @@ These are options that you wish to pass to L<cpanm>.  Do not prefix
 the option name with a '-'.  You can pass any option you like, but the
 C<--mirror> and C<--mirror-only> options will always be set to point
 to the Pinto repository.
+
+=item --local-lib DIRECTORY
+
+=item -l DIRECTORY
+
+Shortcut for setting the C<--local-lib> option on L<cpanm>.  Same as
+C<--cpanm-options local-lib=DIRECTORY> or C<-o l=DIRECTORY>.
+
+=item --local-lib-contained DIRECTORY
+
+=item -l DIRECTORY
+
+Shortcut for setting the C<--local-lib-contained> option on L<cpanm>.
+Same as C<--cpanm-options local-lib-containted=DIRECTORY> or C<-o
+L=DIRECTORY>.
+
+=item --pull
+
+Recursively Pull prerequsiste packages (or the targets themselves)
+onto the stack before installing.  Without the C<--pull> option, all
+prerequisites must already be on the stack.  See the
+L<pull|App::Pinto::Command::pull> command to explicitly pull packages
+onto a stack or the L<merge|App::Pinto::Command::merge> command to
+merge packages from one stack to another.
 
 =item --stack=NAME
 

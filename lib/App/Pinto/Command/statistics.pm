@@ -11,30 +11,13 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.040_02'; # VERSION
+our $VERSION = '0.041'; # VERSION
 
 #------------------------------------------------------------------------------
 
 sub command_names { return qw( statistics stats ) }
 
 #------------------------------------------------------------------------------
-
-sub usage_desc {
-    my ($self) = @_;
-
-    my ($command) = $self->command_names();
-
- my $usage =  <<"END_USAGE";
-%c --root=REPOSITORY_ROOT $command
-END_USAGE
-
-    chomp $usage;
-    return $usage;
-}
-
-
-#------------------------------------------------------------------------------
-
 1;
 
 
@@ -49,7 +32,7 @@ App::Pinto::Command::statistics - report statistics about the repository
 
 =head1 VERSION
 
-version 0.040_02
+version 0.041
 
 =head1 SYNOPSIS
 

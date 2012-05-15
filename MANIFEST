@@ -8,11 +8,14 @@ META.yml
 README
 bin/pinto
 dist.ini
+inc/App/Pinto/Module/Build.pm
 lib/App/Pinto.pm
 lib/App/Pinto/Command.pm
 lib/App/Pinto/Command/add.pm
 lib/App/Pinto/Command/copy.pm
+lib/App/Pinto/Command/delete.pm
 lib/App/Pinto/Command/edit.pm
+lib/App/Pinto/Command/index.pm
 lib/App/Pinto/Command/init.pm
 lib/App/Pinto/Command/install.pm
 lib/App/Pinto/Command/list.pm
@@ -30,6 +33,7 @@ lib/App/Pinto/Command/verify.pm
 lib/App/Pinto/Command/version.pm
 perlcritic.ini
 t/00-compile.t
+t/98-end-to-end.t
 weaver.ini
 xt/author/critic.t
 xt/release/distmeta.t

@@ -1,6 +1,6 @@
-package App::Pinto::Command::nop;
+# ABSTRACT: show the index for a stack
 
-# ABSTRACT: initialize Pinto and exit
+package App::Pinto::Command::index;
 
 use strict;
 use warnings;
@@ -15,28 +15,28 @@ our $VERSION = '0.041'; # VERSION
 
 #------------------------------------------------------------------------------
 
-sub opt_spec {
-    my ($self, $app) = @_;
-
-    return (
-        [ 'sleep=i' => 'seconds to sleep before exiting' ],
-    );
-}
-
-#------------------------------------------------------------------------------
-
 sub validate_args {
     my ($self, $opts, $args) = @_;
 
-    $self->SUPER::validate_args($opts, $args);
-
-    $self->usage_error('Sleep time must be positive integer')
-      if defined $opts->{sleep} && $opts->{sleep} < 1;
+    $self->usage_error('Cannot specify multiple stacks')
+        if @{ $args } > 1;
 
     return 1;
 }
 
 #------------------------------------------------------------------------------
+
+sub execute {
+    my ($self, $opts, $args) = @_;
+
+    my $stack = $args->[0];
+    my $result = $self->pinto->run($self->action_name, stack => $stack);
+
+    return $result->exit_status;
+}
+
+#------------------------------------------------------------------------------
+
 1;
 
 
@@ -47,7 +47,7 @@ sub validate_args {
 
 =head1 NAME
 
-App::Pinto::Command::nop - initialize Pinto and exit
+App::Pinto::Command::index - show the index for a stack
 
 =head1 VERSION
 
@@ -55,27 +55,24 @@ version 0.041
 
 =head1 SYNOPSIS
 
-  pinto --root=REPOSITORY_ROOT nop [OPTIONS]
+  pinto --root=REPOSITORY_ROOT index [STACK]
 
 =head1 DESCRIPTION
 
-This command is a no-operation.  It puts a shared lock on the
-repository, but does not perform any operations.  This is really only
-used for diagnostic purposes.  So don't worry about it too much.
+This command shows the index of a stack.  Unlike the
+L<list|App::Pinto::Command::list> command, this command shows the
+index exactly as it would appear to an installer client.
 
 =head1 COMMAND ARGUMENTS
 
-None.
+The argument is the name of the stack you wish to see the index for.
+If you do not specify a stack, it defaults to whichever stack is
+marked as the default.  Stack names must be alphanumeric (including
+"-" or "_") and will be forced to lowercase.
 
 =head1 COMMAND OPTIONS
 
-=over 4
-
-=item --sleep N
-
-Sleep for N seconds before releasing the lock and exiting.  Default is 0.
-
-=back
+None.
 
 =head1 AUTHOR
 
