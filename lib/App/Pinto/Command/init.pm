@@ -13,7 +13,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.041'; # VERSION
+our $VERSION = '0.042'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -36,11 +36,11 @@ sub execute {
 
     my $global_opts = $self->app->global_options;
 
-    $global_opts->{root}
-        or die "Must specify a repository root directory\n";
+    $global_opts->{root} ||= $ENV{PINTO_REPOSITORY_ROOT}
+        || die "Must specify a repository root directory\n";
 
     $global_opts->{root} =~ m{^https?://}x
-        and die "Cannot create remote repositories\n";
+        && die "Cannot create remote repositories\n";
 
     # Combine repeatable "source" options into one space-delimited "sources" option.
     # TODO: Use a config file format that allows multiple values per key (MVP perhaps?).
@@ -67,7 +67,7 @@ App::Pinto::Command::init - create a new empty repository
 
 =head1 VERSION
 
-version 0.041
+version 0.042
 
 =head1 SYNOPSIS
 

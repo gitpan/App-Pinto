@@ -2,7 +2,7 @@ NAME
     App::Pinto - Command-line driver for Pinto
 
 VERSION
-    version 0.041
+    version 0.042
 
 DESCRIPTION
     App::Pinto is the command-line driver for Pinto. It is just a front-end.

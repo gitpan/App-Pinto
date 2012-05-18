@@ -27,70 +27,70 @@ no_index:
 provides:
   App::Pinto:
     file: lib/App/Pinto.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command:
     file: lib/App/Pinto/Command.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::add:
     file: lib/App/Pinto/Command/add.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::copy:
     file: lib/App/Pinto/Command/copy.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::delete:
     file: lib/App/Pinto/Command/delete.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::edit:
     file: lib/App/Pinto/Command/edit.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::index:
     file: lib/App/Pinto/Command/index.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::init:
     file: lib/App/Pinto/Command/init.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::install:
     file: lib/App/Pinto/Command/install.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::list:
     file: lib/App/Pinto/Command/list.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::manual:
     file: lib/App/Pinto/Command/manual.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::merge:
     file: lib/App/Pinto/Command/merge.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::new:
     file: lib/App/Pinto/Command/new.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::nop:
     file: lib/App/Pinto/Command/nop.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::pin:
     file: lib/App/Pinto/Command/pin.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::props:
     file: lib/App/Pinto/Command/props.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::pull:
     file: lib/App/Pinto/Command/pull.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::stacks:
     file: lib/App/Pinto/Command/stacks.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::statistics:
     file: lib/App/Pinto/Command/statistics.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::unpin:
     file: lib/App/Pinto/Command/unpin.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::verify:
     file: lib/App/Pinto/Command/verify.pm
-    version: 0.041
+    version: 0.042
   App::Pinto::Command::version:
     file: lib/App/Pinto/Command/version.pm
-    version: 0.041
+    version: 0.042
 requires:
   App::Cmd::Setup: 0
   Class::Load: 0
@@ -107,4 +107,4 @@ requires:
 resources:
   bugtracker: https://github.com/thaljef/App-Pinto/issues
   repository: git://github.com/thaljef/App-Pinto.git
-version: 0.041
+version: 0.042
