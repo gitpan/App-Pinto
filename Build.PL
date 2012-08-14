@@ -22,7 +22,7 @@ my %module_build_args = (
     "Jeffrey Thalhammer <jeff\@imaginative-software.com>"
   ],
   "dist_name" => "App-Pinto",
-  "dist_version" => "0.042",
+  "dist_version" => "0.043",
   "license" => "perl",
   "module_name" => "App::Pinto",
   "recommends" => {},
@@ -30,12 +30,14 @@ my %module_build_args = (
   "requires" => {
     "App::Cmd::Setup" => 0,
     "Class::Load" => 0,
+    "Encode" => 0,
     "IO::String" => 0,
     "List::Util" => 0,
     "Log::Dispatch::Screen" => 0,
     "Log::Dispatch::Screen::Color" => 0,
     "Pinto::Constants" => 0,
     "Pod::Usage" => 0,
+    "Term::Prompt" => 0,
     "base" => 0,
     "perl" => "5.006",
     "strict" => 0,
