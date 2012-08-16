@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.044'; # VERSION
+our $VERSION = '0.045'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ App::Pinto::Command::merge - merge one stack into another
 
 =head1 VERSION
 
-version 0.044
+version 0.045
 
 =head1 SYNOPSIS
 
@@ -88,10 +88,11 @@ occurrs.
 
 =back
 
-Whenever there is a conflict, the merge is aborted.  All the pins from
-the C<SOURCE> are also placed on the C<TARGET>.  Both C<SOURCE> and
-C<TARGET> stacks must already exist before merging.  Please see the
-C<copy> or C<new> commands to create stacks.
+Whenever there is a conflict, the merge is aborted.  All the pins
+from the C<SOURCE> are also placed on the C<TARGET>.  Both C<SOURCE>
+and C<TARGET> stacks must already exist before merging.  Please see
+the L<copy|App::Pinto::Command::copy> or L<new|App::Pinto::Command::new>
+commands to create stacks.
 
 =head1 COMMAND ARGUMENTS
 

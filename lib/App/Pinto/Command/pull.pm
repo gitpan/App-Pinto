@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.044'; # VERSION
+our $VERSION = '0.045'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ App::Pinto::Command::pull - pull archives from upstream repositories
 
 =head1 VERSION
 
-version 0.044
+version 0.045
 
 =head1 SYNOPSIS
 
@@ -59,7 +59,7 @@ version 0.044
 
 =head1 DESCRIPTION
 
-This command locate packages in your upstream repositories and then
+This command locates packages in your upstream repositories and then
 pulls the distributions providing those packages into your repository.
 Then it recursively locates and pulls all the distributions that are
 necessary to satisfy their prerequisites.  You can also request to
@@ -68,10 +68,6 @@ directly pull particular distributions.
 When locating packages, Pinto first looks at the the packages that
 already exist in the local repository, then Pinto looks at the
 packages that are available available on the upstream repositories.
-
-You can also use this command to simply put packages into one stack or
-another, and those packages (or their prerequisites) may or may not
-already be in the repository.
 
 =head1 COMMAND ARGUMENTS
 

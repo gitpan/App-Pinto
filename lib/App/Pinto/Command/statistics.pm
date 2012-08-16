@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.044'; # VERSION
+our $VERSION = '0.045'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ App::Pinto::Command::statistics - report statistics about the repository
 
 =head1 VERSION
 
-version 0.044
+version 0.045
 
 =head1 SYNOPSIS
 
@@ -40,8 +40,9 @@ version 0.044
 
 =head1 DESCRIPTION
 
-This command reports some statistics about the repository.  It is
-currently only reports information about the default stack.
+!! THIS COMMAND IS EXPERIMENTAL !!
+
+This command reports some statistics about the repository.
 
 =head1 COMMAND ARGUMENTS
 

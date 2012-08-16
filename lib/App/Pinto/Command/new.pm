@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.044'; # VERSION
+our $VERSION = '0.045'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -63,7 +63,7 @@ App::Pinto::Command::new - create a new empty stack
 
 =head1 VERSION
 
-version 0.044
+version 0.045
 
 =head1 SYNOPSIS
 
@@ -75,7 +75,7 @@ This command creates a new empty stack.
 
 Please see the L<copy|App::Pinto::Command::copy> command to
 create a new stack from another one, or the
-L<edit:App::Pinto::Command::copy> command to change a
+L<edit|App::Pinto::Command::edit> command to change a
 stack's properties after it has been created.
 
 =head1 COMMAND ARGUMENTS

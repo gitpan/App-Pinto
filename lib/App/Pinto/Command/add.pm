@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.044'; # VERSION
+our $VERSION = '0.045'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -51,7 +51,7 @@ App::Pinto::Command::add - add local archives to the repository
 
 =head1 VERSION
 
-version 0.044
+version 0.045
 
 =head1 SYNOPSIS
 
@@ -61,12 +61,12 @@ version 0.044
 =head1 DESCRIPTION
 
 This command adds local distribution archives to the repository.
-Then it recursively locates and pulls all the distributions that are
-necessary to satisfy their prerequisites.
+Then it recursively pulls all the distributions that are necessary
+to satisfy their prerequisites.
 
 When locating packages, Pinto first looks at the the packages that
 already exist in the local repository, then Pinto looks at the
-packages that are available available on the upstream repositories.
+packages that are available on the upstream repositories.
 
 =head1 COMMAND ARGUMENTS
 

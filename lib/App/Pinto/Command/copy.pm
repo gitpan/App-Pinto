@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.044'; # VERSION
+our $VERSION = '0.045'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -66,11 +66,11 @@ App::Pinto::Command::copy - create a new stack by copying another
 
 =head1 VERSION
 
-version 0.044
+version 0.045
 
 =head1 SYNOPSIS
 
-  pinto --root=REPOSITORY_ROOT stack copy [OPTIONS] FROM_STACK TO_STACK
+  pinto --root=REPOSITORY_ROOT copy [OPTIONS] FROM_STACK TO_STACK
 
 =head1 DESCRIPTION
 

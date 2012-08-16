@@ -1,6 +1,6 @@
-package App::Pinto::Command::stacks;
-
 # ABSTRACT: show available stacks
+
+package App::Pinto::Command::stacks;
 
 use strict;
 use warnings;
@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.044'; # VERSION
+our $VERSION = '0.045'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ App::Pinto::Command::stacks - show available stacks
 
 =head1 VERSION
 
-version 0.044
+version 0.045
 
 =head1 SYNOPSIS
 
@@ -81,7 +81,7 @@ Valid placeholders are:
   -----------------------------------------------------------------------------
   %k             Stack name
   %e             Stack description
-  %M             Stack default status                               (*) = default
+  %M             Stack default status                             (*) = default
   %U             Stack last-modified-on
   %j             Stack last-modified-by
   %%             A literal '%'
