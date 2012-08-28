@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.045'; # VERSION
+our $VERSION = '0.047'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ App::Pinto::Command::pull - pull archives from upstream repositories
 
 =head1 VERSION
 
-version 0.045
+version 0.047
 
 =head1 SYNOPSIS
 
@@ -98,6 +98,14 @@ impact the stack.
 
 Do not recursively pull any distributions required to satisfy
 prerequisites for the targets.
+
+=item --pin
+
+Pins the packages to the stack, so they cannot be changed until you
+unpin them.  Only the packages in the requested targets will be pinned
+-- packages in prerequisites will not be pinned.  However, you may pin
+them separately with the L<pin|App::Pinto::Command::pin> command if
+you so desire.
 
 =item --stack=NAME
 

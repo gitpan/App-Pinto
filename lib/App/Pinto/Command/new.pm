@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.045'; # VERSION
+our $VERSION = '0.047'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -20,7 +20,6 @@ sub opt_spec {
 
     return (
         [ 'description|d=s' => 'Brief description of the stack' ],
-        [ 'dryrun'          => 'Do not commit any changes'      ],
     );
 
 
@@ -63,7 +62,7 @@ App::Pinto::Command::new - create a new empty stack
 
 =head1 VERSION
 
-version 0.045
+version 0.047
 
 =head1 SYNOPSIS
 
@@ -91,12 +90,6 @@ forced to lowercase.
 =item --description TEXT
 
 Annotates this stack with a description of its purpose.
-
-=item --dryrun
-
-Go through all the motions, but do not actually commit any changes to
-the repository.  Use this option to see how operations would
-potentially impact the stack.
 
 =back
 

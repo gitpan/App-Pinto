@@ -16,7 +16,6 @@ lib/App/Pinto/Command/clean.pm
 lib/App/Pinto/Command/copy.pm
 lib/App/Pinto/Command/delete.pm
 lib/App/Pinto/Command/edit.pm
-lib/App/Pinto/Command/index.pm
 lib/App/Pinto/Command/init.pm
 lib/App/Pinto/Command/install.pm
 lib/App/Pinto/Command/list.pm
