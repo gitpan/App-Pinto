@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.047'; # VERSION
+our $VERSION = '0.048'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ App::Pinto::Command::props - show stack properties
 
 =head1 VERSION
 
-version 0.047
+version 0.048
 
 =head1 SYNOPSIS
 

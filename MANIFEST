@@ -19,6 +19,7 @@ lib/App/Pinto/Command/edit.pm
 lib/App/Pinto/Command/init.pm
 lib/App/Pinto/Command/install.pm
 lib/App/Pinto/Command/list.pm
+lib/App/Pinto/Command/log.pm
 lib/App/Pinto/Command/manual.pm
 lib/App/Pinto/Command/merge.pm
 lib/App/Pinto/Command/new.pm
@@ -26,6 +27,7 @@ lib/App/Pinto/Command/nop.pm
 lib/App/Pinto/Command/pin.pm
 lib/App/Pinto/Command/props.pm
 lib/App/Pinto/Command/pull.pm
+lib/App/Pinto/Command/revert.pm
 lib/App/Pinto/Command/stacks.pm
 lib/App/Pinto/Command/statistics.pm
 lib/App/Pinto/Command/unpin.pm

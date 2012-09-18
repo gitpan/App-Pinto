@@ -18,7 +18,7 @@ use App::Cmd::Setup -app;
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.047'; # VERSION
+our $VERSION = '0.048'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -51,9 +51,14 @@ sub pinto {
         $global_options->{password} = $self->_prompt_for_password
             if defined $global_options->{password} and $global_options->{password} eq '-';
 
-        # Translate (progressive) verbose value into a (regressive) log_level value
-        $global_options->{log_level} = 3 - min(delete $global_options->{verbose} || 0, 3);
-        $global_options->{log_level} = 4 if delete $global_options->{quiet};
+        # Translating (progressive) verbose values into (regressive) log_level values.
+        # Note that we must not pass log_level into the constructor for Pinto, or it
+        # will set the logging level for its own internal logs.
+
+        my $logger_options = {};
+        $logger_options->{log_level} = 3 - min(delete $global_options->{verbose} || 0, 3);
+        $logger_options->{log_level} = 4 if delete $global_options->{quiet};
+        $logger_options->{nocolor}   = 1 if delete $global_options->{nocolor};
 
         # TODO: Give helpful error message if the right backend
         # is not installed.
@@ -62,7 +67,7 @@ sub pinto {
         Class::Load::load_class($pinto_class);
 
         my $pinto = $pinto_class->new( %{ $global_options } );
-        $pinto->add_logger($self->make_logger( %{ $global_options } ));
+        $pinto->add_logger($self->make_logger( %{ $logger_options } ));
 
         $pinto;
     };
@@ -137,7 +142,7 @@ App::Pinto - Command-line driver for Pinto
 
 =head1 VERSION
 
-version 0.047
+version 0.048
 
 =head1 DESCRIPTION
 

@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.047'; # VERSION
+our $VERSION = '0.048'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -21,7 +21,8 @@ sub opt_spec {
     return (
         [ 'author=s'    => 'Your (alphanumeric) author ID'     ],
         [ 'dryrun'      => 'Do not commit any changes'         ],
-        [ 'norecurse'   => 'Do not recursively import prereqs' ],
+        [ 'message|m=s' => 'Message to describe the change'    ],
+        [ 'norecurse|n' => 'Do not recursively pull prereqs'   ],
         [ 'pin'         => 'Pin packages to the stack'         ],
         [ 'stack|s=s'   => 'Put packages into this stack'      ],
     );
@@ -51,7 +52,7 @@ App::Pinto::Command::add - add local archives to the repository
 
 =head1 VERSION
 
-version 0.047
+version 0.048
 
 =head1 SYNOPSIS
 
@@ -95,7 +96,20 @@ Go through all the motions, but do not actually commit any changes to
 the repository.  Use this option to see how operations would
 potentially impact the stack.
 
+=item --message=TEXT
+
+=item -m TEXT
+
+Use TEXT as the revision history log message.  If you do not use
+C<--message> option, then you will be prompted to enter the message
+via your text editor.  Use the C<EDITOR> or C<VISUAL> environment
+variables to control which editor is used.  A log message is not
+required whenever the C<--dryrun> option is set, or if the action did
+not yield any changes to the repository.
+
 =item --norecurse
+
+=item -n
 
 Do not recursively pull distributions required to satisfy the
 prerequisites of the added distributions.
