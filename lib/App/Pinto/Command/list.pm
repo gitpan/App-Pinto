@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.049'; # VERSION
+our $VERSION = '0.050'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -65,7 +65,7 @@ App::Pinto::Command::list - show the packages in a stack
 
 =head1 VERSION
 
-version 0.049
+version 0.050
 
 =head1 SYNOPSIS
 
@@ -177,7 +177,7 @@ name of whichever stack is currently marked as the default stack.  Use
 the L<stacks|App::Pinto::Command::stack> command to see the
 stacks in the repository.
 
-If the stack name is "@" then the contents of all stacks will be
+If the stack name is "%" then the contents of all stacks will be
 listed.  And unless an explicit C<--format> was given, the listing
 will include the name of the stack on each record.
 
