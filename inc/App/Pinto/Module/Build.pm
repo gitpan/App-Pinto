@@ -7,7 +7,7 @@ use base 'Module::Build';
 
 #------------------------------------------------------------------------------
 
-my $MIN_PINTO_VERSION = 0.052;
+my $MIN_PINTO_VERSION = 0.053;
 my $MIN_PINTO_REMOTE_VERSION = 0.046;
 
 #------------------------------------------------------------------------------
@@ -53,6 +53,7 @@ sub new {
 sub _display_message {
 
   print  <<END_MESSAGE;
+
 #######################################################################
 App::Pinto only provides a command-line interface.  To do anything
 useful, you also need to install a backend, which ships separately

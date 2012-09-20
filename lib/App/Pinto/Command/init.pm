@@ -1,6 +1,6 @@
 package App::Pinto::Command::init;
 
-# ABSTRACT: create a new empty repository
+# ABSTRACT: create a new repository
 
 use strict;
 use warnings;
@@ -13,7 +13,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.048'; # VERSION
+our $VERSION = '0.049'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -80,11 +80,11 @@ sub execute {
 
 =head1 NAME
 
-App::Pinto::Command::init - create a new empty repository
+App::Pinto::Command::init - create a new repository
 
 =head1 VERSION
 
-version 0.048
+version 0.049
 
 =head1 SYNOPSIS
 

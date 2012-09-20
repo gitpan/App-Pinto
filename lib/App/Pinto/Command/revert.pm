@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.048'; # VERSION
+our $VERSION = '0.049'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -23,6 +23,7 @@ sub opt_spec {
     my ($self, $app) = @_;
 
     return (
+        [ 'dryrun'         => 'Do not commit any changes'           ],
         [ 'message|m=s'    => 'Message to describe the change'      ],
         [ 'revision|R=i'   => 'Revision number to revert to'        ],
         [ 'stack|s=s'      => 'Revert stack other than the default' ],
@@ -67,7 +68,7 @@ App::Pinto::Command::revert - restore stack to a prior revision
 
 =head1 VERSION
 
-version 0.048
+version 0.049
 
 =head1 SYNOPSIS
 
@@ -107,6 +108,12 @@ called C<dev> then all the following would be equivalent:
 =head1 COMMAND OPTIONS
 
 =over 4
+
+=item --dryrun
+
+Go through all the motions, but do not actually commit any changes to
+the repository.  Use this option to see how the command would
+potentially impact the stack.
 
 =item --message=TEXT
 

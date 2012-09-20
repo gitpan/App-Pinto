@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.048'; # VERSION
+our $VERSION = '0.049'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ App::Pinto::Command::add - add local archives to the repository
 
 =head1 VERSION
 
-version 0.048
+version 0.049
 
 =head1 SYNOPSIS
 
@@ -93,7 +93,7 @@ username.
 =item --dryrun
 
 Go through all the motions, but do not actually commit any changes to
-the repository.  Use this option to see how operations would
+the repository.  Use this option to see how the command would
 potentially impact the stack.
 
 =item --message=TEXT

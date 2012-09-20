@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.048'; # VERSION
+our $VERSION = '0.049'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -54,7 +54,7 @@ App::Pinto::Command::delete - delete a stack
 
 =head1 VERSION
 
-version 0.048
+version 0.049
 
 =head1 SYNOPSIS
 
@@ -62,9 +62,9 @@ version 0.048
 
 =head1 DESCRIPTION
 
-This command deletes a stack.  Any distributions that were registered
-on that stack will be permanently deleted, unless they are also
-registered on another stack.
+This command permanently deletes a stack.  Once a stack is deleted,
+there is no way to get it back.  However, any distributions that were
+registered on the stack will always remain in the repository.
 
 The stack that is currently marked as the default can never be
 deleted.  If you wish to delete it, you must first mark another stack
