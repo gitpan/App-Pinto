@@ -18,7 +18,7 @@ use App::Cmd::Setup -app;
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.050'; # VERSION
+our $VERSION = '0.051'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -134,7 +134,9 @@ sub _prompt_for_password {
 
 =pod
 
-=for :stopwords Jeffrey Thalhammer Imaginative Software Systems
+=for :stopwords Jeffrey Thalhammer Imaginative Software Systems cpan testmatrix url
+annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata
+placeholders metacpan
 
 =head1 NAME
 
@@ -142,7 +144,7 @@ App::Pinto - Command-line driver for Pinto
 
 =head1 VERSION
 
-version 0.050
+version 0.051
 
 =head1 DESCRIPTION
 
@@ -169,6 +171,74 @@ L<Pinto::Manual> for general information on using Pinto.
 L<pinto> to create and manage a Pinto repository.
 
 L<pintod> to allow remote access to your Pinto repository.
+
+=head1 SUPPORT
+
+=head2 Perldoc
+
+You can find documentation for this module with the perldoc command.
+
+  perldoc App::Pinto
+
+=head2 Websites
+
+The following websites have more information about this module, and may be of help to you. As always,
+in addition to those websites please use your favorite search engine to discover more resources.
+
+=over 4
+
+=item *
+
+Search CPAN
+
+The default CPAN search engine, useful to view POD in HTML format.
+
+L<http://search.cpan.org/dist/App-Pinto>
+
+=item *
+
+CPAN Ratings
+
+The CPAN Ratings is a website that allows community ratings and reviews of Perl modules.
+
+L<http://cpanratings.perl.org/d/App-Pinto>
+
+=item *
+
+CPAN Testers
+
+The CPAN Testers is a network of smokers who run automated tests on uploaded CPAN distributions.
+
+L<http://www.cpantesters.org/distro/A/App-Pinto>
+
+=item *
+
+CPAN Testers Matrix
+
+The CPAN Testers Matrix is a website that provides a visual overview of the test results for a distribution on various Perls/platforms.
+
+L<http://matrix.cpantesters.org/?dist=App-Pinto>
+
+=item *
+
+CPAN Testers Dependencies
+
+The CPAN Testers Dependencies is a website that shows a chart of the test results of all dependencies for a distribution.
+
+L<http://deps.cpantesters.org/?module=App::Pinto>
+
+=back
+
+=head2 Bugs / Feature Requests
+
+L<https://github.com/thaljef/App-Pinto/issues>
+
+=head2 Source Code
+
+
+L<https://github.com/thaljef/App-Pinto>
+
+  git clone git://github.com/thaljef/App-Pinto.git
 
 =head1 AUTHOR
 

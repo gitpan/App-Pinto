@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.050'; # VERSION
+our $VERSION = '0.051'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ App::Pinto::Command::edit - change stack properties
 
 =head1 VERSION
 
-version 0.050
+version 0.051
 
 =head1 SYNOPSIS
 
