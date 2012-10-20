@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.051'; # VERSION
+our $VERSION = '0.052'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -49,7 +49,7 @@ App::Pinto::Command::unpin - free packages that have been pinned
 
 =head1 VERSION
 
-version 0.051
+version 0.052
 
 =head1 SYNOPSIS
 

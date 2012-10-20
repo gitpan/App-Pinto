@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.051'; # VERSION
+our $VERSION = '0.052'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -54,7 +54,7 @@ App::Pinto::Command::delete - delete a stack
 
 =head1 VERSION
 
-version 0.051
+version 0.052
 
 =head1 SYNOPSIS
 
@@ -74,8 +74,8 @@ to control which stack is the default.
 =head1 COMMAND ARGUMENTS
 
 The required argument is the name of the stack you wish to delete.
-Stack names must be alphanumeric (including "-" or "_") and will be
-forced to lowercase.
+Stack names must be alphanumeric plus hyphens and undersocres, and
+are not case-sensitive.
 
 =head1 COMMAND OPTIONS
 

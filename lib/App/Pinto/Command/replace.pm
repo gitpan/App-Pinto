@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.051'; # VERSION
+our $VERSION = '0.052'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -68,7 +68,7 @@ App::Pinto::Command::replace - substitue an archive in the repository
 
 =head1 VERSION
 
-version 0.051
+version 0.052
 
 =head1 SYNOPSIS
 
@@ -101,10 +101,10 @@ C<AUTHOR/ARCHIVE>).  For example: C<JOHN/Foo-Bar-1.0.tar.gz>
 =item --author NAME
 
 Set the identity of the replacement distribution author.  The C<NAME>
-must be alphanumeric characters (no spaces) and will be forced to
-uppercase.  Defaults to the C<user> specified in your C<~/.pause>
-configuration file (if such file exists).  Otherwise, defaults to your
-current login username.
+must be alphanumeric characters plus hyphens and uderscores.  Defaults
+to the uppercased C<user> specified in your C<~/.pause> configuration
+file if such file exists.  Otherwise, defaults to your current login
+username.
 
 =item --dryrun
 

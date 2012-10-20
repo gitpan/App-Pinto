@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.051'; # VERSION
+our $VERSION = '0.052'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -63,7 +63,7 @@ App::Pinto::Command::new - create a new empty stack
 
 =head1 VERSION
 
-version 0.051
+version 0.052
 
 =head1 SYNOPSIS
 
@@ -81,8 +81,8 @@ stack's properties after it has been created.
 =head1 COMMAND ARGUMENTS
 
 The required argument is the name of the stack you wish to create.
-Stack names must be alphanumeric (including "-" or "_") and will be
-forced to lowercase.
+Stack names must be alphanumeric plus hyphens and underscores, and
+are not case sensitive.
 
 =head1 COMMAND OPTIONS
 

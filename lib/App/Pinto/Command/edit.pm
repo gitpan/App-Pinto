@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.051'; # VERSION
+our $VERSION = '0.052'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ App::Pinto::Command::edit - change stack properties
 
 =head1 VERSION
 
-version 0.051
+version 0.052
 
 =head1 SYNOPSIS
 
@@ -76,9 +76,9 @@ properties.
 =head1 COMMAND ARGUMENTS
 
 The argument is the name of the stack you wish to edit the properties
-for.  If you do not specify a stack, it defaults to whichever stack is
-currently marked as default.  Stack names must be alphanumeric
-(including "-" or "_") and will be forced to lowercase.
+for.  If you do not specify a stack, it defaults to whichever stack
+is currently marked as default.  Stack names must be alphanumeric
+plus hyphens and underscores, and are not case-sensitive.
 
 =head1 COMMAND OPTIONS
 
@@ -99,11 +99,11 @@ repository has multiple users.
 
 =item -P name1=value1
 
-Specifies property names and values.  You can repeat this option to
-set multiple properties.  If the property with that name does not
-already exist, it will be created.  Property names must be
-alphanumeric, and may not contain spaces.  They will also be forced to
-lowercase.  Properties starting with the prefix 'pinto:' are reserved
+Specifies property names and values.  You can repeat this option
+to set multiple properties.  If the property with that name does
+not already exist, it will be created.  Property names must be
+alphanumeric plus hyphens and underscores, and are not case
+sensitive.  Properties starting with the prefix 'pinto-' are reserved
 for internal use, SO DO NOT CHANGE THEM.
 
 =back

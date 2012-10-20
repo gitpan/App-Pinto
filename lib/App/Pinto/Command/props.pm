@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.051'; # VERSION
+our $VERSION = '0.052'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ App::Pinto::Command::props - show stack properties
 
 =head1 VERSION
 
-version 0.051
+version 0.052
 
 =head1 SYNOPSIS
 
@@ -80,8 +80,8 @@ properties.
 
 The argument is the name of the stack you wish to see the properties
 for.  If you do not specify a stack, it defaults to whichever stack is
-marked as the default.  Stack names must be alphanumeric (including "-"
-or "_") and will be forced to lowercase.
+marked as the default.  Stack names must be alphanumeric plus hyphens
+and underscores, and are not case sensitive. 
 
 =head1 COMMAND OPTIONS
 
