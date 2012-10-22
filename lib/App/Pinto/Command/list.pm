@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.052'; # VERSION
+our $VERSION = '0.053'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -65,7 +65,7 @@ App::Pinto::Command::list - show the packages in a stack
 
 =head1 VERSION
 
-version 0.052
+version 0.053
 
 =head1 SYNOPSIS
 
@@ -102,7 +102,8 @@ stack specified with the C<--stack> option.
 =item -A AUTHOR
 
 Limit the listing to records where the distribution author is AUTHOR.
-Note this is an exact match, not a pattern match.
+Note this is an exact match, not a pattern match.  However, it is
+not case sensitive.
 
 =item --distributions PATTERN
 
@@ -125,6 +126,7 @@ placeholders are:
   %v             Package version
   %y             Pin status:                     (+) = is pinned
   %a             Distribution author
+  %A             Canonical distribution author (i.e. uppercase)
   %f             Distribution archive filename
   %m             Distribution maturity:          (d) = developer, (r) = release
   %p             Distribution index path [1]

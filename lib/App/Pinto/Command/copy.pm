@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.052'; # VERSION
+our $VERSION = '0.053'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -23,8 +23,9 @@ sub opt_spec {
     my ($self, $app) = @_;
 
     return (
-        [ 'message|m=s'     => 'Message to describe the change' ],
+        [ 'default'         => 'Make the new stack the default stack' ],
         [ 'description|d=s' => 'Brief description of the stack' ],
+        [ 'message|m=s'     => 'Message to describe the change' ],
     );
 
 
@@ -66,7 +67,7 @@ App::Pinto::Command::copy - create a new stack by copying another
 
 =head1 VERSION
 
-version 0.052
+version 0.053
 
 =head1 SYNOPSIS
 
@@ -93,6 +94,10 @@ and are not case-sensitive.
 
 =over 4
 
+=item --default
+
+Also mark the new stack as the default stack.
+
 =item --description=TEXT
 
 =item -d TEXT
@@ -107,9 +112,7 @@ help explain the purpose of the stack.
 Use TEXT as the revision history log message.  If you do not use
 C<--message> option, then you will be prompted to enter the message
 via your text editor.  Use the C<EDITOR> or C<VISUAL> environment
-variables to control which editor is used.  A log message is not
-required whenever the C<--dryrun> option is set, or if the action did
-not yield any changes to the repository.
+variables to control which editor is used.
 
 =back
 
