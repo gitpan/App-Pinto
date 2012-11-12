@@ -28,6 +28,7 @@ lib/App/Pinto/Command/nop.pm
 lib/App/Pinto/Command/pin.pm
 lib/App/Pinto/Command/props.pm
 lib/App/Pinto/Command/pull.pm
+lib/App/Pinto/Command/rename.pm
 lib/App/Pinto/Command/replace.pm
 lib/App/Pinto/Command/revert.pm
 lib/App/Pinto/Command/stacks.pm

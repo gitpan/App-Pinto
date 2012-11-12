@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.053'; # VERSION
+our $VERSION = '0.054'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -24,6 +24,7 @@ sub opt_spec {
         [ 'message|m=s' => 'Message to describe the change'         ],
         [ 'norecurse|n' => 'Do not recursively pull prereqs'        ],
         [ 'pin'         => 'Pin packages to all affected stacks'    ],
+        [ 'use-default-message|M' => 'Use the generated message'    ],
     );
 }
 
@@ -68,7 +69,7 @@ App::Pinto::Command::replace - substitue an archive in the repository
 
 =head1 VERSION
 
-version 0.053
+version 0.054
 
 =head1 SYNOPSIS
 
@@ -76,8 +77,10 @@ version 0.053
 
 =head1 DESCRIPTION
 
+!! THIS COMMAND IS EXPERIMENTAL !!
+
 This command adds a new distribution archive to the repository and
-puts its packages into all stacks that currently contain packages from
+pulls its packages into all stacks that currently contain packages from
 the old distribution.  Effectively, it replaces one distribution with
 another across all stacks.
 
@@ -116,12 +119,13 @@ potentially impact the stack.
 
 =item -m TEXT
 
-Use TEXT as the revision history log message.  If you do not use
-C<--message> option, then you will be prompted to enter the message
-via your text editor.  Use the C<EDITOR> or C<VISUAL> environment
-variables to control which editor is used.  A log message is not
-required whenever the C<--dryrun> option is set, or if the action did
-not yield any changes to the repository.
+Use TEXT as the revision history log message.  If you do not use the
+C<--message> option or the C<--use-default-message> option, then you
+will be prompted to enter the message via your text editor.  Use the
+C<EDITOR> or C<VISUAL> environment variables to control which editor
+is used.  A log message is not required whenever the C<--dryrun>
+option is set, or if the action did not yield any changes to the
+repository.
 
 =item --norecurse
 
@@ -137,6 +141,15 @@ stacks, so they cannot be changed until you unpin them.  The pin does
 not apply to any prerequisites that are pulled in for this
 distribution.  However, you may pin them separately with the
 L<pin|App::Pinto::Command::pin> command, if you so desire.
+
+=item --use-default-message
+
+=item -M
+
+Use the default value for the revision history log message.  Pinto
+will generate a semi-informative log message just based on the command
+and its arguments.  If you set an explicit message with C<--message>,
+the C<--use-default-message> option will be silently ignored.
 
 =back
 

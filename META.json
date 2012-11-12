@@ -63,107 +63,111 @@
    "provides" : {
       "App::Pinto" : {
          "file" : "lib/App/Pinto.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command" : {
          "file" : "lib/App/Pinto/Command.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::add" : {
          "file" : "lib/App/Pinto/Command/add.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::blame" : {
          "file" : "lib/App/Pinto/Command/blame.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::clean" : {
          "file" : "lib/App/Pinto/Command/clean.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::copy" : {
          "file" : "lib/App/Pinto/Command/copy.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::delete" : {
          "file" : "lib/App/Pinto/Command/delete.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::edit" : {
          "file" : "lib/App/Pinto/Command/edit.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::init" : {
          "file" : "lib/App/Pinto/Command/init.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::install" : {
          "file" : "lib/App/Pinto/Command/install.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::list" : {
          "file" : "lib/App/Pinto/Command/list.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::log" : {
          "file" : "lib/App/Pinto/Command/log.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::manual" : {
          "file" : "lib/App/Pinto/Command/manual.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::merge" : {
          "file" : "lib/App/Pinto/Command/merge.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::new" : {
          "file" : "lib/App/Pinto/Command/new.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::nop" : {
          "file" : "lib/App/Pinto/Command/nop.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::pin" : {
          "file" : "lib/App/Pinto/Command/pin.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::props" : {
          "file" : "lib/App/Pinto/Command/props.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::pull" : {
          "file" : "lib/App/Pinto/Command/pull.pm",
-         "version" : "0.053"
+         "version" : "0.054"
+      },
+      "App::Pinto::Command::rename" : {
+         "file" : "lib/App/Pinto/Command/rename.pm",
+         "version" : "0.054"
       },
       "App::Pinto::Command::replace" : {
          "file" : "lib/App/Pinto/Command/replace.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::revert" : {
          "file" : "lib/App/Pinto/Command/revert.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::stacks" : {
          "file" : "lib/App/Pinto/Command/stacks.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::statistics" : {
          "file" : "lib/App/Pinto/Command/statistics.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::unpin" : {
          "file" : "lib/App/Pinto/Command/unpin.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::verify" : {
          "file" : "lib/App/Pinto/Command/verify.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       },
       "App::Pinto::Command::version" : {
          "file" : "lib/App/Pinto/Command/version.pm",
-         "version" : "0.053"
+         "version" : "0.054"
       }
    },
    "release_status" : "stable",
@@ -177,6 +181,6 @@
          "web" : "https://github.com/thaljef/App-Pinto"
       }
    },
-   "version" : "0.053"
+   "version" : "0.054"
 }
 

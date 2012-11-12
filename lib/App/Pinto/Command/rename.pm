@@ -1,6 +1,6 @@
-# ABSTRACT: delete a stack
+# ABSTRACT: change the name of a stack
 
-package App::Pinto::Command::delete;
+package App::Pinto::Command::rename;
 
 use strict;
 use warnings;
@@ -15,15 +15,15 @@ our $VERSION = '0.054'; # VERSION
 
 #------------------------------------------------------------------------------
 
-sub command_names { return qw(delete del rm) }
+sub command_names { return qw(rename mv) }
 
 #------------------------------------------------------------------------------
 
 sub validate_args {
     my ($self, $opts, $args) = @_;
 
-    $self->usage_error('Must specify exactly one stack')
-        if @{$args} != 1;
+    $self->usage_error('Must specify FROM_STACK and TO_STACK')
+        if @{$args} != 2;
 
     return 1;
 }
@@ -33,8 +33,8 @@ sub validate_args {
 sub execute {
     my ($self, $opts, $args) = @_;
 
-    my $result = $self->pinto->run($self->action_name, %{$opts},
-                                                       stack => $args->[0]);
+    my %stacks = ( from_stack => $args->[0], to_stack => $args->[1] );
+    my $result = $self->pinto->run($self->action_name, %{$opts}, %stacks);
 
     return $result->exit_status;
 }
@@ -50,7 +50,7 @@ sub execute {
 
 =head1 NAME
 
-App::Pinto::Command::delete - delete a stack
+App::Pinto::Command::rename - change the name of a stack
 
 =head1 VERSION
 
@@ -58,28 +58,31 @@ version 0.054
 
 =head1 SYNOPSIS
 
-  pinto --root=REPOSITORY_ROOT delete [OPTIONS] STACK
+  pinto --root=REPOSITORY_ROOT rename [OPTIONS] FROM_STACK TO_STACK
 
 =head1 DESCRIPTION
 
-This command permanently deletes a stack.  Once a stack is deleted,
-there is no way to get it back.  However, any distributions that were
-registered on the stack will always remain in the repository.
+This command changes the name of an existing stack.  Once the name is
+changed, you will not be able to perform commands or access archives
+via the old stack name.  Name changes are not recorded in the revision
+history, so the L<revert|App::Pinto::Command::revert> command will
+never cause the stack name to change back to its former value.
 
-The stack that is currently marked as the default can never be
-deleted.  If you wish to delete it, you must first mark another stack
-as the default. Use the L<edit|App::Pinto::Command::edit> command
-to control which stack is the default.
+Please see the L<new|App::Pinto::Command::new> command to create a new
+empty stack, or the L<edit|App::Pinto::Command::edit> command to
+change a stack's properties after it has been created, or the
+L<copy|App::Pinto::Command::copy> command to duplicate an existing
+stack.
 
 =head1 COMMAND ARGUMENTS
 
-The required argument is the name of the stack you wish to delete.
-Stack names must be alphanumeric plus hyphens and undersocres, and
-are not case-sensitive.
+The two required arguments are the current name and new name of the
+stack.  Stack names must be alphanumeric plus hyphens and underscores,
+and are not case-sensitive.
 
 =head1 COMMAND OPTIONS
 
-None.
+NONE.
 
 =head1 AUTHOR
 
@@ -96,5 +99,4 @@ the same terms as the Perl 5 programming language system itself.
 
 
 __END__
-
 
