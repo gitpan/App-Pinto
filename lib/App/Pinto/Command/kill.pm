@@ -1,6 +1,6 @@
-# ABSTRACT: create a new empty stack
+# ABSTRACT: permanently delete a stack
 
-package App::Pinto::Command::new;
+package App::Pinto::Command::kill;
 
 use strict;
 use warnings;
@@ -15,12 +15,15 @@ our $VERSION = '0.065_01'; # VERSION
 
 #------------------------------------------------------------------------------
 
+sub command_names { return qw(kill) }
+
+#------------------------------------------------------------------------------
+
 sub opt_spec {
     my ($self, $app) = @_;
 
     return (
-        [ 'default'               => 'Make the new stack the default stack' ],
-        [ 'description|d=s'       => 'Brief description of the stack'       ],
+        [ 'force'  => 'Kill even if stack is locked'  ],
     );
 }
 
@@ -32,9 +35,18 @@ sub validate_args {
     $self->usage_error('Must specify exactly one stack')
         if @{$args} != 1;
 
-    $opts->{stack} = $args->[0];
-
     return 1;
+}
+
+#------------------------------------------------------------------------------
+
+sub execute {
+    my ($self, $opts, $args) = @_;
+
+    my $result = $self->pinto->run($self->action_name, %{$opts},
+                                                       stack => $args->[0]);
+
+    return $result->exit_status;
 }
 
 #------------------------------------------------------------------------------
@@ -48,7 +60,7 @@ __END__
 
 =head1 NAME
 
-App::Pinto::Command::new - create a new empty stack
+App::Pinto::Command::kill - permanently delete a stack
 
 =head1 VERSION
 
@@ -56,35 +68,29 @@ version 0.065_01
 
 =head1 SYNOPSIS
 
-  pinto --root=REPOSITORY_ROOT new [OPTIONS] STACK
+  pinto --root=REPOSITORY_ROOT kill [OPTIONS] STACK
 
 =head1 DESCRIPTION
 
-This command creates a new empty stack.
-
-See the L<copy|App::Pinto::Command::copy> command to create a new 
-stack from another one, or the L<props|App::Pinto::Command::props> 
-command to change a stack's properties after it has been created.
+This command permanently deletes a stack.  Once a stack is killed, there 
+is no direct way to get it back.  However, any distributions that were 
+registered on the stack will still remain in the repository.
 
 =head1 COMMAND ARGUMENTS
 
-The required argument is the name of the stack you wish to create.
+The required argument is the name of the stack you wish to kill.
 Stack names must be alphanumeric plus hyphens and underscores, and
-are not case sensitive.
+are not case-sensitive.
 
 =head1 COMMAND OPTIONS
 
 =over 4
 
-=item --default
+=item --force
 
-Also mark the new stack as the default stack.
-
-=item --description=TEXT
-
-=item -d TEXT
-
-Use TEXT for the description of the stack.
+Kill the stack even if it is currently locked.  Normally, locked
+stacks cannot be deleted.  Take care when deleting a locked stack
+as it usually means the stack is important to someone.
 
 =back
 

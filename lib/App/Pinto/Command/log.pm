@@ -1,4 +1,4 @@
-# ABSTRACT: show the revision history of a stack
+# ABSTRACT: show the revision logs of a stack
 
 package App::Pinto::Command::log;
 
@@ -11,11 +11,11 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #------------------------------------------------------------------------------
 
-sub command_names { return qw( log hist ) }
+sub command_names { return qw(log history) }
 
 #------------------------------------------------------------------------------
 
@@ -23,9 +23,7 @@ sub opt_spec {
     my ($self, $app) = @_;
 
     return (
-        [ 'detailed|d'        => 'Show detailed history'                         ],
-        [ 'revision|R=i'      => 'Only show selected revision'                   ],
-        [ 'stack|s=s'         => 'Show history for stack other than the default' ],
+        [ 'stack|s=s' => 'Show history for this stack' ],
     );
 }
 
@@ -34,20 +32,11 @@ sub opt_spec {
 sub validate_args {
     my ($self, $opts, $args) = @_;
 
-    $self->usage_error('Multiple arguments are not allowed')
-        if @{ $args } > 1;
+    $self->usage_error('Multiple arguments are not allowed') if @{ $args } > 1;
 
+    $opts->{no_color} = $self->app->global_options->{no_color};
 
-    if ($args->[0]) {
-
-        my ($stack, $revision) = split /@/, $args->[0], 2;
-
-        # split returns '' for empty fields.  But to make Moose
-        # happy, they need to be undef if they really don't exist.
-
-        $opts->{stack}    = $stack    if length $stack;
-        $opts->{revision} = $revision if length $revision;
-    }
+    $opts->{stack} = $args->[0] if $args->[0];
 
     return 1;
 }
@@ -56,7 +45,7 @@ sub validate_args {
 
 1;
 
-
+__END__
 
 =pod
 
@@ -64,72 +53,49 @@ sub validate_args {
 
 =head1 NAME
 
-App::Pinto::Command::log - show the revision history of a stack
+App::Pinto::Command::log - show the revision logs of a stack
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 SYNOPSIS
 
-  pinto --root=REPOSITORY_ROOT log [STACK[@REVISION]] [OPTIONS]
+  pinto --root=REPOSITORY_ROOT log [STACK] [OPTIONS]
 
 =head1 DESCRIPTION
 
 !! THIS COMMAND IS EXPERIMENTAL !!
 
-This command shows the revision history for the stack.  You can see
-the log messages as well as which packages were added or removed
-in each revision.
+This command shows the commit logs for the stack.  To see the precise
+changes in any particular commit, use the L<App::Pinto::Command::show>
+command.
 
 =head1 COMMAND ARGUMENTS
 
-As an alternative to the C<--stack> and C<--revision> options, you can
-also specify them stack as a single argument. So the following
-examples are equivalent:
-
-  pinto --root REPOSITORY_ROOT log --stack=dev --revision=289
-  pinto --root REPOSITORY_ROOT log dev@289
-
-A C<stack@revision> argument will override anything specified with the
-C<--stack> or C<--revision> switches.
-
-If neither the stack nor revision is specified using either the
-arguments or switches, then all revisions of the default stack
-will be shown.  So if the default stack is called C<"dev"> then
-the following are all equivalent:
+As an alternative to the C<--stack> option, you can specify it as
+an argument.  So the following examples are equivalent:
 
   pinto --root REPOSITORY_ROOT log --stack=dev
   pinto --root REPOSITORY_ROOT log dev
-  pinto --root REPOSITORY_ROOT log
+
+A C<stack> argument will override anything specified with the
+C<--stack> option. If the stack is not specified using neither 
+argument nor option, then the logs of the default stack will 
+be shown.
 
 =head1 COMMAND OPTIONS
 
 =over 4
 
-=item --detailed
-
-=item -d
-
-Show detailed history, including which packages were added and removed
-in the revision.
-
-=item --revision=NUMBER
-
-=item -R NUMBER
-
-Show only the history for the revision with the given NUMBER.
-Otherwise, the entire history of the stack is shown in
-reverse-chronological order.
-
 =item --stack NAME
 
 =item -s NAME
 
-Show the revision history of the stack with the given NAME.  Defaults
-to the name of whichever stack is currently marked as the default
-stack.  Use the L<stacks|App::Pinto::Command::stack> command to see
-the stacks in the repository.
+Show the logs of the stack with the given NAME.  Defaults to the name
+of whichever stack is currently marked as the default stack.  Use the
+L<stacks|App::Pinto::Command::stack> command to see the stacks in the
+repository.
 
 =back
 
@@ -145,7 +111,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

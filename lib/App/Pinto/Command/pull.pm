@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -19,11 +19,12 @@ sub opt_spec {
     my ($self, $app) = @_;
 
     return (
-        [ 'dryrun'      => 'Do not commit any changes'           ],
-        [ 'message|m=s' => 'Message to describe the change'      ],
-        [ 'norecurse|n' => 'Do not recursively pull prereqs'     ],
-        [ 'pin'         => 'Pin all the packages to the stack'   ],
-        [ 'stack|s=s'   => 'Put packages into this stack'        ],
+        [ 'dry-run'      => 'Do not commit any changes'           ],
+        [ 'message|m=s'  => 'Message to describe the change'      ],
+        [ 'no-fail'      => 'Do not fail when there is an error'  ],
+        [ 'no-recurse|n' => 'Do not recursively pull prereqs'     ],
+        [ 'pin'          => 'Pin the packages to the stack'       ],
+        [ 'stack|s=s'    => 'Put packages into this stack'        ],
         [ 'use-default-message|M' => 'Use the generated message' ],
     );
 }
@@ -40,7 +41,7 @@ sub args_from_stdin { return 1 }
 
 1;
 
-
+__END__
 
 =pod
 
@@ -52,24 +53,23 @@ App::Pinto::Command::pull - pull archives from upstream repositories
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 SYNOPSIS
 
   pinto --root=REPOSITORY_ROOT pull [OPTIONS] TARGET ...
-  pinto --root=REPOSITORY_ROOT pull [OPTIONS] < LIST_OF_TARGETS
 
 =head1 DESCRIPTION
 
 This command locates packages in your upstream repositories and then
-pulls the distributions providing those packages into your repository.
-Then it recursively locates and pulls all the distributions that are
-necessary to satisfy their prerequisites.  You can also request to
-directly pull particular distributions.
+pulls the distributions providing those packages into your repository
+and registers them on a stack.  Then it recursively locates and pulls 
+all the distributions that are necessary to satisfy their prerequisites.  
+You can also request to directly pull particular distributions.
 
-When locating packages, Pinto first looks at the the packages that
+When locating prerequisites, Pinto first looks at the packages that
 already exist in the local repository, then Pinto looks at the
-packages that are available available on the upstream repositories.
+packages that are available on the upstream repositories.
 
 =head1 COMMAND ARGUMENTS
 
@@ -90,13 +90,28 @@ or ';') will be ignored.
 
 =over 4
 
-=item --dryrun
+=item --dry-run
 
 Go through all the motions, but do not actually commit any changes to
 the repository.  Use this option to see how upgrades would potentially
 impact the stack.
 
-=item --norecurse
+=item --no-fail
+
+!! THIS OPTION IS EXPERIMENTAL !!
+
+Normally, failure to pull a target (or its prerequisites) causes the 
+command to immediately abort and rollback the changes to the repository.  
+But if C<--no-fail> is set, then only the changes caused by the failed
+target (and its prerequisites) will be rolled back and the command
+will continue processing the remaining targets.
+
+This option is useful if you want to throw a list of targets into
+a repository and see which ones are problematic.  Once you've fixed
+the broken ones, you can throw the whole list at the repository
+again.
+
+=item --no-recurse
 
 =item -n
 
@@ -111,7 +126,7 @@ Use TEXT as the revision history log message.  If you do not use the
 C<--message> option or the C<--use-default-message> option, then you
 will be prompted to enter the message via your text editor.  Use the
 C<EDITOR> or C<VISUAL> environment variables to control which editor
-is used.  A log message is not required whenever the C<--dryrun>
+is used.  A log message is not required whenever the C<--dry-run>
 option is set, or if the action did not yield any changes to the
 repository.
 
@@ -124,6 +139,8 @@ them separately with the L<pin|App::Pinto::Command::pin> command if
 you so desire.
 
 =item --stack=NAME
+
+=item -s NAME
 
 Puts all the packages onto the stack with the given NAME.  Defaults
 to the name of whichever stack is currently marked as the default
@@ -153,7 +170,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

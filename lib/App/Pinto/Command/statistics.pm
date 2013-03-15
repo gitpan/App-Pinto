@@ -1,6 +1,6 @@
-package App::Pinto::Command::statistics;
-
 # ABSTRACT: report statistics about the repository
+
+package App::Pinto::Command::statistics;
 
 use strict;
 use warnings;
@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ sub command_names { return qw( statistics stats ) }
 #------------------------------------------------------------------------------
 1;
 
-
+__END__
 
 =pod
 
@@ -32,7 +32,7 @@ App::Pinto::Command::statistics - report statistics about the repository
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 SYNOPSIS
 
@@ -64,7 +64,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

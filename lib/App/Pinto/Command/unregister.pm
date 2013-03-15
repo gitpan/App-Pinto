@@ -1,6 +1,6 @@
-package App::Pinto::Command::unpin;
+# ABSTRACT: remove packages from a stack
 
-# ABSTRACT: free packages that have been pinned
+package App::Pinto::Command::unregister;
 
 use strict;
 use warnings;
@@ -19,10 +19,11 @@ sub opt_spec {
     my ($self, $app) = @_;
 
     return (
-        [ 'dry-run'     => 'Do not commit any changes'            ],
-        [ 'message|m=s' => 'Message to describe the change'       ],
-        [ 'stack|s=s'   => 'Unpin targets from this stack'        ],
-        [ 'use-default-message|M' => 'Use the generated message'  ],
+        [ 'dry-run'     => 'Do not commit any changes'              ],
+        [ 'force'       => 'Remove packages even if pinned'         ],
+        [ 'message|m=s' => 'Message to describe the change'         ],
+        [ 'stack|s=s'   => 'Remove packages from this stack'        ],
+        [ 'use-default-message|M' => 'Use the generated message'    ],
     );
 }
 
@@ -35,7 +36,6 @@ sub args_attribute { return 'targets' }
 sub args_from_stdin { return 1 }
 
 #------------------------------------------------------------------------------
-
 1;
 
 __END__
@@ -46,7 +46,7 @@ __END__
 
 =head1 NAME
 
-App::Pinto::Command::unpin - free packages that have been pinned
+App::Pinto::Command::unregister - remove packages from a stack
 
 =head1 VERSION
 
@@ -54,28 +54,30 @@ version 0.065_01
 
 =head1 SYNOPSIS
 
-  pinto --root=REPOSITORY_ROOT unpin [OPTIONS] TARGET ...
+  pinto --root=REPOSITORY_ROOT unregister [OPTIONS] TARGET ...
 
 =head1 DESCRIPTION
 
-This command unpins package in the stack, so that the stack can be
-merged into another stack with a newer packages, or so the packages
-can be upgraded to a newer version within this stack.
+!! THIS COMMAND IS EXPERIMENTAL !!
+
+This command unregisters packages from a stack, so that they no longer
+appear in its index.  However, the archives that contain the packages
+will remain in the repository.  When unregistering, all the sister 
+packages in the same distribution are also unregistered.
+
+To permanently remove an archive from the repository, use the
+L<delete|App::Pinto::Command::delete> command. To re-register packages
+on a stack, use the L<register|App::Pinto::Command::register> command.
 
 =head1 COMMAND ARGUMENTS
 
-Arguments are the targets you wish to unpin.  Targets can be
-specified as packages or distributions, such as:
+Arguments are the targets that you want to unregister.  Targets can be
+specified as packages (with or without version number) or distributions.  
+For example:
 
-  Some::Package
-  Some::Other::Package
-
-  AUTHOR/Some-Dist-1.2.tar.gz
-  AUTHOR/Some-Other-Dist-1.3.zip
-
-When unpinning a distribution, all the packages in that distribution
-become unpinned.  Likewise when unpinning a package, all its sister
-packages in the same distribution also become unpinned.
+  Foo::Bar                                 # Unregisters any version of Foo::Bar
+  Foo::Bar~1.2                             # Unregisters Foo::Bar 1.2 or higher
+  SHAKESPEARE/King-Lear-1.2.tar.gz         # Unregisters a specific distribuion
 
 You can also pipe arguments to this command over STDIN.  In that case,
 blank lines and lines that look like comments (i.e. starting with "#"
@@ -88,8 +90,14 @@ or ';') will be ignored.
 =item --dry-run
 
 Go through all the motions, but do not actually commit any changes to
-the repository.  Use this option to see how the command would
-potentially impact the stack.
+the repository.  Use this option to see how the command would potentially
+impact the stack.
+
+=item --force
+
+Unregister packages even if they are pinned to the stack.  Take care when
+unregistering pinned packages, as it usually means that particular package
+is important to someone.
 
 =item --message=TEXT
 
@@ -105,10 +113,10 @@ repository.
 
 =item --stack=NAME
 
-Unpins the package on the stack with the given NAME.  Defaults to the
-name of whichever stack is currently marked as the default stack.  Use
-the L<stacks|App::Pinto::Command::stacks> command to see your
-stacks.
+Unregisters the targets from the stack with the given NAME.  Defaults 
+to the name of whichever stack is currently marked as the default stack.
+Use the L<stacks|App::Pinto::Command::stacks> command to see the
+stacks in the repository.
 
 =item --use-default-message
 

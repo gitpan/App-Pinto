@@ -14,7 +14,7 @@ use App::Cmd::Setup -command;
 
 #-----------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -124,7 +124,7 @@ sub command_namespace_prefix { return __PACKAGE__ }
 #-----------------------------------------------------------------------------
 1;
 
-
+__END__
 
 =pod
 
@@ -136,7 +136,7 @@ App::Pinto::Command - Base class for pinto commands
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 AUTHOR
 
@@ -150,6 +150,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__

@@ -8,7 +8,7 @@ use warnings;
 
 #-----------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ exit App::Pinto->run;
 
 #-----------------------------------------------------------------------------
 
-
+__END__
 
 =pod
 
@@ -29,7 +29,7 @@ pinto - manage a Pinto repository
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 SYNOPSIS
 
@@ -61,9 +61,11 @@ environment variable to point to your repository.  The root can be a
 path to a local directory, or the URL where a L<pintod> server is
 listening.
 
-=item --nocolor
+=item --no-color
 
-Do not colorize diagnostic messages according to severity.
+=item --no-colour
+
+Do not colorize command output.
 
 =item --password PASS
 
@@ -170,7 +172,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

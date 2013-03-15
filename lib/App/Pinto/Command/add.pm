@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -19,12 +19,13 @@ sub opt_spec {
     my ($self, $app) = @_;
 
     return (
-        [ 'author=s'    => 'Your (alphanumeric) author ID'       ],
-        [ 'dryrun'      => 'Do not commit any changes'           ],
-        [ 'message|m=s' => 'Message to describe the change'      ],
-        [ 'norecurse|n' => 'Do not recursively pull prereqs'     ],
-        [ 'pin'         => 'Pin packages to the stack'           ],
-        [ 'stack|s=s'   => 'Put packages into this stack'        ],
+        [ 'author=s'     => 'Your (alphanumeric) author ID'       ],
+        [ 'dry-run'      => 'Do not commit any changes'           ],
+        [ 'message|m=s'  => 'Message to describe the change'      ],
+        [ 'no-fail'      => 'Do not fail when there is an error'  ],
+        [ 'no-recurse|n' => 'Do not recursively pull prereqs'     ],
+        [ 'pin'          => 'Pin packages to the stack'           ],
+        [ 'stack|s=s'    => 'Put packages into this stack'        ],
         [ 'use-default-message|M' => 'Use the generated message' ],
     );
 }
@@ -41,7 +42,7 @@ sub args_from_stdin { return 1 }
 
 1;
 
-
+__END__
 
 =pod
 
@@ -53,20 +54,19 @@ App::Pinto::Command::add - add local archives to the repository
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 SYNOPSIS
 
   pinto --root=REPOSITORY_ROOT add [OPTIONS] ARCHIVE_FILE ...
-  pinto --root=REPOSITORY_ROOT add [OPTIONS] < LIST_OF_ARCHIVE_FILES
 
 =head1 DESCRIPTION
 
-This command adds local distribution archives to the repository.
-Then it recursively pulls all the distributions that are necessary
-to satisfy their prerequisites.
+This command adds local distribution archives to the repository and
+registers their packages on a stack. Then it recursively pulls all the 
+distributions that are necessary to satisfy their prerequisites.
 
-When locating packages, Pinto first looks at the the packages that
+When locating prerequisites, Pinto first looks at the packages that
 already exist in the local repository, then Pinto looks at the
 packages that are available on the upstream repositories.
 
@@ -87,11 +87,11 @@ or ';') will be ignored.
 
 Set the identity of the distribution author.  The C<NAME> must be
 alphanumeric characters plus hyphens and underscores.  Defaults to
-the uppercased C<user> specified in your C<~/.pause> configuration
-file if such file exists.  Otherwise, defaults to your current login
-username.
+the C<user> specified in your C<~/.pause> configuration file if such 
+file exists.  Otherwise, defaults to your current login username.
+By convention, author IDs are always folded to uppercase.
 
-=item --dryrun
+=item --dry-run
 
 Go through all the motions, but do not actually commit any changes to
 the repository.  Use this option to see how the command would
@@ -105,16 +105,31 @@ Use TEXT as the revision history log message.  If you do not use the
 C<--message> option or the C<--use-default-message> option, then you
 will be prompted to enter the message via your text editor.  Use the
 C<EDITOR> or C<VISUAL> environment variables to control which editor
-is used.  A log message is not required whenever the C<--dryrun>
+is used.  A log message is not required whenever the C<--dry-run>
 option is set, or if the action did not yield any changes to the
 repository.
 
-=item --norecurse
+=item --no-fail
+
+!! THIS OPTION IS EXPERIMENTAL !!
+
+Normally, failure to add an archive (or its prerequisites) causes the 
+command to immediately abort and rollback the changes to the repository.  
+But if C<--no-fail> is set, then only the changes caused by the failed
+archive (and its prerequisites) will be rolled back and the command
+will continue processing the remaining archives.
+
+This option is useful if you want to throw a list of archives into
+a repository and see which ones are problematic.  Once you've fixed
+the broken ones, you can throw the whole list at the repository
+again.
+
+=item --no-recurse
 
 =item -n
 
 Do not recursively pull distributions required to satisfy the
-prerequisites of the added distributions.
+prerequisites of the added archives.
 
 =item --pin
 
@@ -125,6 +140,8 @@ may pin them separately with the
 L<pin|App::Pinto::Command::pin> command, if you so desire.
 
 =item --stack NAME
+
+=item -s NAME
 
 Puts all the packages onto the stack with the given NAME.  Defaults
 to the name of whichever stack is currently marked as the default
@@ -154,7 +171,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

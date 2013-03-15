@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -23,10 +23,9 @@ sub opt_spec {
     my ($self, $app) = @_;
 
     return (
-        [ 'default'         => 'Make the new stack the default stack' ],
-        [ 'description|d=s' => 'Brief description of the stack'       ],
-        [ 'message|m=s'     => 'Message to describe the change'       ],
-        [ 'use-default-message|M' => 'Use the generated message'      ],
+        [ 'default'         => 'Make the new stack the default stack'  ],
+        [ 'description|d=s' => 'Brief description of the stack'        ],
+        [ 'lock'            => 'Lock the new stack to prevent changes' ],
     );
 
 
@@ -56,7 +55,7 @@ sub execute {
 #------------------------------------------------------------------------------
 1;
 
-
+__END__
 
 =pod
 
@@ -68,7 +67,7 @@ App::Pinto::Command::copy - create a new stack by copying another
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 SYNOPSIS
 
@@ -80,10 +79,9 @@ This command creates a new stack by copying an existing one.  All the
 pins and properties from the existing stack will also be copied to the
 new one.  The new stack must not already exist.
 
-Please see the L<new|App::Pinto::Command::new> command to
-create a new empty stack, or the
-L<edit|App::Pinto::Command::edit> command to change a stack's
-properties after it has been created.
+Use the L<new|App::Pinto::Command::new> command to create a new empty 
+stack, or the L<props|App::Pinto::Command::props> command to change 
+a stack's properties after it has been created.
 
 =head1 COMMAND ARGUMENTS
 
@@ -103,27 +101,15 @@ Also mark the new stack as the default stack.
 
 =item -d TEXT
 
-Use TEXT for the description of the stack.  This is usually used to
-help explain the purpose of the stack.
+Use TEXT for the description of the stack.  If not specified, defaults
+to 'Copy of stack FROM_STACK'.
 
-=item --message=TEXT
+=item --lock
 
-=item -m TEXT
-
-Use TEXT as the revision history log message.  If you do not use the
-C<--message> option or the C<--use-default-message> option, then you
-will be prompted to enter the message via your text editor.  Use the
-C<EDITOR> or C<VISUAL> environment variables to control which editor
-is used.
-
-=item --use-default-message
-
-=item -M
-
-Use the default value for the revision history log message.  Pinto
-will generate a semi-informative log message just based on the command
-and its arguments.  If you set an explicit message with C<--message>,
-the C<--use-default-message> option will be silently ignored.
+Also lock the new stack to prevent future changes.  This is useful for
+creating a read-only "tag" of a stack.  You can always use the
+L<lock|App::Pinto::Command::lock> or
+L<unlock|App::Pinto::Command::unlock> commands at a later time.
 
 =back
 
@@ -139,7 +125,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

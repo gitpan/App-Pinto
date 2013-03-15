@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 use Module::Build 0.3601;
-use lib 'inc'; use App::Pinto::Module::Build;
+
 
 my %module_build_args = (
   "build_requires" => {
@@ -12,6 +12,7 @@ my %module_build_args = (
     "File::Temp" => 0,
     "File::Which" => 0,
     "Module::Build" => "0.3601",
+    "Pinto" => 0,
     "Test::More" => 0
   },
   "configure_requires" => {
@@ -22,7 +23,7 @@ my %module_build_args = (
     "Jeffrey Thalhammer <jeff\@imaginative-software.com>"
   ],
   "dist_name" => "App-Pinto",
-  "dist_version" => "0.054",
+  "dist_version" => "0.065_01",
   "license" => "perl",
   "module_name" => "App::Pinto",
   "recommends" => {},
@@ -35,7 +36,9 @@ my %module_build_args = (
     "List::Util" => 0,
     "Log::Dispatch::Screen" => 0,
     "Log::Dispatch::Screen::Color" => 0,
-    "Pinto::Constants" => 0,
+    "Pinto" => "0.065_01",
+    "Pinto::Constants" => "0.065_01",
+    "Pinto::Util" => "0.065_01",
     "Pod::Usage" => 0,
     "Term::Prompt" => 0,
     "base" => 0,
@@ -49,6 +52,6 @@ my %module_build_args = (
 );
 
 
-my $build = App::Pinto::Module::Build->new(%module_build_args);
+my $build = Module::Build->new(%module_build_args);
 
 $build->create_build_script;

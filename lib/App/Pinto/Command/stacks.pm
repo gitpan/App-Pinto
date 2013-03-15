@@ -5,13 +5,15 @@ package App::Pinto::Command::stacks;
 use strict;
 use warnings;
 
+use Pinto::Util qw(interpolate);
+
 #-----------------------------------------------------------------------------
 
 use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -19,7 +21,7 @@ sub opt_spec {
     my ($self, $app) = @_;
 
     return (
-        [ 'format=s' => 'Format of the listing' ],
+        [ 'format=s' => 'Format of the listing (See POD for details)' ],
     );
 }
 
@@ -31,8 +33,10 @@ sub validate_args {
     $self->usage_error('No arguments are allowed')
         if @{ $args };
 
-    $opts->{format} = eval qq{"$opts->{format}"} ## no critic qw(StringyEval)
-        if $opts->{format};
+    $opts->{format} = interpolate( $opts->{format} )
+        if exists $opts->{format};
+
+    $opts->{no_color} = $self->app->global_options->{no_color};
 
     return 1;
 }
@@ -40,7 +44,7 @@ sub validate_args {
 #------------------------------------------------------------------------------
 1;
 
-
+__END__
 
 =pod
 
@@ -52,17 +56,16 @@ App::Pinto::Command::stacks - show available stacks
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 SYNOPSIS
 
-  pinto --root=REPOSITORY_ROOT stacks [OPTIONS]
   pinto --root=REPOSITORY_ROOT stacks [OPTIONS]
 
 =head1 DESCRIPTION
 
 This command lists the names (and some other details) of all the
-stacks available in the repository.
+stacks currently available in the repository.
 
 =head1 COMMAND ARGUMENTS
 
@@ -82,8 +85,14 @@ Valid placeholders are:
   %k             Stack name
   %e             Stack description
   %M             Stack default status                             (*) = default
-  %U             Stack last-modified-on
-  %j             Stack last-modified-by
+  %L             Stack lock status                                (!) = locked
+  %i             Stack head revision id prefix
+  $I             Stack head revision id
+  %g             Stack head revision message (full)
+  %t             Stack head revision message title
+  %b             Stack head revision message body
+  %u             Stack head revision committed-on
+  %j             Stack head revision committed-by
   %%             A literal '%'
 
 =back
@@ -100,7 +109,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

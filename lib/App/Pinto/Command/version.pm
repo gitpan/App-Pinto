@@ -11,7 +11,7 @@ use base qw(App::Pinto::Command);
 
 #-------------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #-------------------------------------------------------------------------------
 
@@ -19,12 +19,12 @@ sub execute {
     my ($self, $opts, $args) = @_;
 
     my $app_class = ref $self->app();
-    my $app_version = $self->app->VERSION;
+    my $app_version = $self->app->VERSION || '?';
     print "$app_class $app_version\n";
 
     for my $pinto_class ( qw(Pinto Pinto::Remote) ) {
         Class::Load::try_load_class( $pinto_class ) or next;
-        my $pinto_version = $pinto_class->VERSION;
+        my $pinto_version = $pinto_class->VERSION || '?';
         print "$pinto_class $pinto_version\n";
     }
 
@@ -36,8 +36,8 @@ sub execute {
 
 1;
 
-
 __END__
+
 =pod
 
 =for :stopwords Jeffrey Thalhammer Imaginative Software Systems
@@ -48,7 +48,7 @@ App::Pinto::Command::version - show version information
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 DESCRIPTION
 
@@ -66,4 +66,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

@@ -18,22 +18,20 @@ use App::Cmd::Setup -app;
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #------------------------------------------------------------------------------
 
 sub global_opt_spec {
 
     return (
-        [ 'root|r=s'     => 'Path to your repository root directory'  ],
-        [ 'nocolor'      => 'Do not colorize diagnostic messages'     ],
-        [ 'password|p=s' => 'Password for server authentication'      ],
-        [ 'quiet|q'      => 'Only report fatal errors'                ],
-        [ 'username|u=s' => 'Username for server authentication'      ],
-        [ 'verbose|v+'   => 'More diagnostic output (repeatable)'     ],
+        [ 'root|r=s'           => 'Path to your repository root directory'  ],
+        [ 'no-color|no-colour' => 'Do not colorize any output'              ],
+        [ 'password|p=s'       => 'Password for server authentication'      ],
+        [ 'quiet|q'            => 'Only report fatal errors'                ],
+        [ 'username|u=s'       => 'Username for server authentication'      ],
+        [ 'verbose|v+'         => 'More diagnostic output (repeatable)'     ],
     );
-
-    # TODO: Add options for color contols!
 }
 
 #------------------------------------------------------------------------------
@@ -58,7 +56,7 @@ sub pinto {
         my $logger_options = {};
         $logger_options->{log_level} = 3 - min(delete $global_options->{verbose} || 0, 3);
         $logger_options->{log_level} = 4 if delete $global_options->{quiet};
-        $logger_options->{nocolor}   = 1 if delete $global_options->{nocolor};
+        $logger_options->{no_color}  = 1 if delete $global_options->{no_color};
 
         # TODO: Give helpful error message if the right backend
         # is not installed.
@@ -85,10 +83,10 @@ sub pinto_class_for {
 sub make_logger {
     my ($self, %options) = @_;
 
-    my $nocolor   = $options{nocolor};
-    my $colors    = $nocolor ? {} : ($self->log_colors);
+    my $no_color  = $options{no_color};
+    my $colors    = $no_color ? {} : ($self->log_colors);
     my $log_class = 'Log::Dispatch::Screen';
-    $log_class   .= '::Color' unless $nocolor;
+    $log_class   .= '::Color' unless $no_color;
 
     my $log_level = $options{log_level};
 
@@ -130,7 +128,7 @@ sub _prompt_for_password {
 
 1;
 
-
+__END__
 
 =pod
 
@@ -144,7 +142,7 @@ App::Pinto - Command-line driver for Pinto
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 DESCRIPTION
 
@@ -252,7 +250,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-

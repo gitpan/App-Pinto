@@ -1,6 +1,6 @@
-package App::Pinto::Command::pin;
-
 # ABSTRACT: force a package to stay in a stack
+
+package App::Pinto::Command::pin;
 
 use strict;
 use warnings;
@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #-----------------------------------------------------------------------------
 
@@ -19,9 +19,9 @@ sub opt_spec {
     my ($self, $app) = @_;
 
     return (
-        [ 'dryrun'      => 'Do not commit any changes'           ],
+        [ 'dry-run'     => 'Do not commit any changes'           ],
         [ 'message|m=s' => 'Message to describe the change'      ],
-        [ 'stack|s=s'   => 'Stack on which to pin the target'    ],
+        [ 'stack|s=s'   => 'Pin targets to this stack'           ],
         [ 'use-default-message|M' => 'Use the generated message' ],
     );
 }
@@ -38,7 +38,7 @@ sub args_from_stdin { return 1 }
 
 1;
 
-
+__END__
 
 =pod
 
@@ -50,25 +50,26 @@ App::Pinto::Command::pin - force a package to stay in a stack
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 SYNOPSIS
 
   pinto --root=REPOSITORY_ROOT pin [OPTIONS] TARGET ...
-  pinto --root=REPOSITORY_ROOT pin [OPTIONS] < LIST_OF_TARGETS
 
 =head1 DESCRIPTION
 
-This command pins a package so that it stays in the stack even if a
-newer version is subsequently mirrored, imported, or added to that
-stack.  The pin is local to the stack and does not affect any other
-stacks.
+This command pins a package so that it cannot be changed even if a
+different version is added or pulled to the stack The pin is local
+to the stack and does not affect any other stacks.
 
-A package must be in the stack before you can pin it.  To bring a
-package into the stack, use the
-L<pull|App::Pinto::Command::pull> command.  To remove the pin
-from a package, please see the
-L<unpin|App::Pinto::Command::unpin> command.
+A package must be registered on the stack before you can pin it.  To bring a
+package onto the stack, use the L<pull|App::Pinto::Command::pull> or 
+L<register|App::Pinto::Command::register> commands.  To remove the pin
+from a package, see the L<unpin|App::Pinto::Command::unpin> command.
+
+When pinning, all its sister packages in that distribution also become 
+pinned.  Pinned packages also cannot be unregistered from the stack
+or deleted from the repository without the C<--force> option.
 
 =head1 COMMAND ARGUMENTS
 
@@ -81,10 +82,6 @@ specified as packages or distributions, such as:
   AUTHOR/Some-Dist-1.2.tar.gz
   AUTHOR/Some-Other-Dist-1.3.zip
 
-When pinning a distribution, all the packages in that distribution
-become pinned.  Likewise when pinning a package, all its sister
-packages in the same distributon also become pinned.
-
 You can also pipe arguments to this command over STDIN.  In that case,
 blank lines and lines that look like comments (i.e. starting with "#"
 or ';') will be ignored.
@@ -93,7 +90,7 @@ or ';') will be ignored.
 
 =over 4
 
-=item --dryrun
+=item --dry-run
 
 Go through all the motions, but do not actually commit any changes to
 the repository.  Use this option to see how the command would
@@ -107,7 +104,7 @@ Use TEXT as the revision history log message.  If you do not use the
 C<--message> option or the C<--use-default-message> option, then you
 will be prompted to enter the message via your text editor.  Use the
 C<EDITOR> or C<VISUAL> environment variables to control which editor
-is used.  A log message is not required whenever the C<--dryrun>
+is used.  A log message is not required whenever the C<--dry-run>
 option is set, or if the action did not yield any changes to the
 repository.
 
@@ -141,8 +138,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-
-

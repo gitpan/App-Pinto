@@ -1,9 +1,11 @@
-# ABSTRACT: show stack properties
+# ABSTRACT: show or set stack properties
 
 package App::Pinto::Command::props;
 
 use strict;
 use warnings;
+
+use Pinto::Util qw(interpolate);
 
 #-----------------------------------------------------------------------------
 
@@ -11,7 +13,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -19,6 +21,7 @@ sub opt_spec {
 
   return (
       [ 'format=s' => 'Format specification (See POD for details)' ],
+      [ 'properties|prop|P=s%' => 'name=value pairs of properties' ],
   );
 }
 
@@ -31,28 +34,21 @@ sub validate_args {
     $self->usage_error('Cannot specify multiple stacks')
         if @{$args} > 1;
 
-    $opts->{format} = eval qq{"$opts->{format}"} ## no critic qw(StringyEval)
-        if $opts->{format};
+    $opts->{format} = interpolate( $opts->{format} )
+        if exists $opts->{format};
+
+    $opts->{stack} = $args->[0]
+        if $args->[0];
+
+    $opts->{no_color} = $self->app->global_options->{no_color};
 
     return 1;
 }
 
 #------------------------------------------------------------------------------
-
-sub execute {
-    my ($self, $opts, $args) = @_;
-
-    my $stack = $args->[0];
-    my $result = $self->pinto->run($self->action_name, %{$opts},
-                                                       stack => $stack);
-
-    return $result->exit_status;
-}
-
-#------------------------------------------------------------------------------
 1;
 
-
+__END__
 
 =pod
 
@@ -60,28 +56,28 @@ sub execute {
 
 =head1 NAME
 
-App::Pinto::Command::props - show stack properties
+App::Pinto::Command::props - show or set stack properties
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 SYNOPSIS
 
-  pinto --root=REPOSITORY_ROOT props [OPTIONS] STACK
+  pinto --root=REPOSITORY_ROOT props [OPTIONS] [STACK]
 
 =head1 DESCRIPTION
 
-This command shows the properties of a stack.  See the
-L<edit|App::Pinto::Command::edit> command to change the
-properties.
+This command shows or sets stack configuration properties.  If the
+C<--properties> option is given, then the properties will be set.  If
+the C<--properties> option is not given, then properties will just be
+shown.
 
 =head1 COMMAND ARGUMENTS
 
-The argument is the name of the stack you wish to see the properties
-for.  If you do not specify a stack, it defaults to whichever stack is
-marked as the default.  Stack names must be alphanumeric plus hyphens
-and underscores, and are not case sensitive. 
+If the C<STACK> argument is given, then the properties for that stack
+will be set/shown.  If the C<STACK> argument is not given, then
+properties for the default stack will be set/shown.
 
 =head1 COMMAND OPTIONS
 
@@ -89,13 +85,29 @@ and underscores, and are not case sensitive.
 
 =item --format=FORMAT_SPECIFICATION
 
-Format the output using C<printf>-style placeholders.  Valid
-placeholders are:
+Format the output using C<printf>-style placeholders.  This only
+matters when showing properties.  Valid placeholders are:
 
   Placeholder    Meaning
   -----------------------------------------------------------------------------
-  %n             Property name
+  %p             Property name
   %v             Package value
+
+=item --properties name=value
+
+=item --prop name=value
+
+=item -P name=value
+
+Specifies property names and values.  You can repeat this option to
+set multiple properties.  If the property with that name does not
+already exist, it will be created.  Property names must be
+alphanumeric plus hyphens and underscores, and will be forced to
+lower case.  Setting a property to an empty string will cause it 
+to be deleted.
+
+Properties starting with the prefix C<pinto-> are reserved for
+internal use, SO DO NOT CREATE OR CHANGE THEM.
 
 =back
 
@@ -111,8 +123,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-
-

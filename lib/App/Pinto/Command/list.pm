@@ -5,13 +5,15 @@ package App::Pinto::Command::list;
 use strict;
 use warnings;
 
+use Pinto::Util qw(interpolate);
+
 #-----------------------------------------------------------------------------
 
 use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.054'; # VERSION
+our $VERSION = '0.065_01'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -28,7 +30,7 @@ sub opt_spec {
         [ 'packages|P=s'      => 'Limit to matching package names' ],
         [ 'pinned!'           => 'Limit to pinned packages (negatable)' ],
         [ 'format=s'          => 'Format specification (See POD for details)' ],
-        [ 'stack|s=s'         => 'List a stack other than the default' ],
+        [ 'stack|s=s'         => 'List contents of this stack' ],
     );
 }
 
@@ -40,8 +42,10 @@ sub validate_args {
     $self->usage_error('Multiple arguments are not allowed')
         if @{ $args } > 1;
 
-    $opts->{format} = eval qq{"$opts->{format}"} ## no critic qw(StringyEval)
-        if $opts->{format};
+    $opts->{no_color} = $self->app->global_options->{no_color};
+
+    $opts->{format} = interpolate( $opts->{format} )
+        if exists $opts->{format};
 
     $opts->{stack} = $args->[0]
         if $args->[0];
@@ -53,7 +57,7 @@ sub validate_args {
 
 1;
 
-
+__END__
 
 =pod
 
@@ -65,7 +69,7 @@ App::Pinto::Command::list - show the packages in a stack
 
 =head1 VERSION
 
-version 0.054
+version 0.065_01
 
 =head1 SYNOPSIS
 
@@ -74,13 +78,12 @@ version 0.054
 =head1 DESCRIPTION
 
 This command lists the distributions and packages that are registered
-to a stack within the repository.  You can format the output to see
-the specific bits of information that you want.
+on a stack.  You can format the output to see the specific bits of 
+information that you want.
 
-For a large repository, it can take fair amount of time to list
-everything.  You might consider using the C<--packages> or
-C<--distributions> options to narrow the scope.  If you need even more
-precise filtering, consider running the output through C<grep>.
+For a large repository, it can take a long time to list everything.
+So consider using the C<--packages> or C<--distributions> options
+to narrow the scope.  
 
 =head1 COMMAND ARGUMENTS
 
@@ -91,7 +94,9 @@ stack as an argument. So the following examples are equivalent:
   pinto --root REPOSITORY_ROOT list dev
 
 A stack specified as an argument in this fashion will override any
-stack specified with the C<--stack> option.
+stack specified with the C<--stack> option.  If a stack is not
+specified by neither argument nor option, then it defaults to the
+stack that is currently marked as the default stack.
 
 =head1 COMMAND OPTIONS
 
@@ -121,27 +126,21 @@ placeholders are:
 
   Placeholder    Meaning
   -----------------------------------------------------------------------------
-  %n             Package name
-  %N             Package name-version
+  %p             Package name
+  %P             Package name-version
   %v             Package version
-  %y             Pin status:                     (+) = is pinned
+  %y             Pin status:                     (!) = is pinned
   %a             Distribution author
-  %A             Canonical distribution author (i.e. uppercase)
   %f             Distribution archive filename
   %m             Distribution maturity:          (d) = developer, (r) = release
-  %p             Distribution index path [1]
-  %P             Distribution physical path [2]
-  %s             Distribution origin:            (l) = local, (f) = foreign
-  %S             Distribution source repository
+  %h             Distribution index path [1]
+  %H             Distribution physical path [2]
+  %s             Distribution origin:            (l) = local,     (f) = foreign
+  %S             Distribution source
   %d             Distribution name
   %D             Distribution name-version
-  %w             Distribution version
+  %V             Distribution version
   %u             Distribution url
-  %k             Stack name
-  %e             Stack description
-  %M             Stack status:                   (*) = default
-  %U             Stack last-modified-time
-  %j             Stack last-modified-user
   %%             A literal '%'
 
 
@@ -176,12 +175,8 @@ Limit the listing to records for packages that are pinned.
 
 List the contents of the stack with the given NAME.  Defaults to the
 name of whichever stack is currently marked as the default stack.  Use
-the L<stacks|App::Pinto::Command::stack> command to see the
+the L<stacks|App::Pinto::Command::stacks> command to see the
 stacks in the repository.
-
-If the stack name is "%" then the contents of all stacks will be
-listed.  And unless an explicit C<--format> was given, the listing
-will include the name of the stack on each record.
 
 =back
 
@@ -197,7 +192,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-
-__END__
-
