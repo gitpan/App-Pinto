@@ -2,7 +2,7 @@ NAME
     App::Pinto - Command-line driver for Pinto
 
 VERSION
-    version 0.065_01
+    version 0.065_02
 
 DESCRIPTION
     App::Pinto is the command-line driver for Pinto. It is just a front-end.
@@ -13,17 +13,15 @@ DESCRIPTION
     install Pinto::Remote. If you're not sure what you need, then install
     Task::Pinto to get the whole kit.
 
-METHODS
-  pinto
-    Returns a reference to a Pinto or Pinto::Remote object that has been
-    constructed for this application.
-
 SEE ALSO
-    Pinto::Manual for general information on using Pinto.
-
     pinto to create and manage a Pinto repository.
 
     pintod to allow remote access to your Pinto repository.
+
+    Pinto::Manual for general information on using Pinto.
+
+    Stratopan <http://stratopan.com> for hosting your Pinto repository in
+    the cloud.
 
 SUPPORT
   Perldoc

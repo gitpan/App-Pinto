@@ -13,7 +13,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.065_01'; # VERSION
+our $VERSION = '0.065_02'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -36,8 +36,6 @@ sub validate_args {
     $opts->{format} = interpolate( $opts->{format} )
         if exists $opts->{format};
 
-    $opts->{no_color} = $self->app->global_options->{no_color};
-
     return 1;
 }
 
@@ -56,7 +54,7 @@ App::Pinto::Command::stacks - show available stacks
 
 =head1 VERSION
 
-version 0.065_01
+version 0.065_02
 
 =head1 SYNOPSIS
 

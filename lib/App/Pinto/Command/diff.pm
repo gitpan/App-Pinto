@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.065_01'; # VERSION
+our $VERSION = '0.065_02'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -32,8 +32,6 @@ sub validate_args {
     $self->usage_error('Must specify at least one stack') if @{$args} < 1;
 
     $self->usage_error('Cannot specify more than two stacks') if @{$args} > 2;
-
-    $opts->{no_color} = $self->app->global_options->{no_color};
     
     return 1;
 }
@@ -68,7 +66,7 @@ App::Pinto::Command::diff - show difference between two stacks
 
 =head1 VERSION
 
-version 0.065_01
+version 0.065_02
 
 =head1 SYNOPSIS
 

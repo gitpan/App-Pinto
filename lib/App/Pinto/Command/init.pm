@@ -13,7 +13,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.065_01'; # VERSION
+our $VERSION = '0.065_02'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -24,7 +24,6 @@ sub opt_spec {
         [ 'description=s' => 'Description of the initial stack'             ],
         [ 'no-default'    => 'Do not mark the initial stack as the default' ],
         [ 'no-history'    => 'Do not record stack history'                  ],
-        [ 'log-level=s'   => 'Minimum logging level for the log file'       ],
         [ 'source=s@'     => 'URL of upstream repository (repeatable)'      ],
     );
 }
@@ -99,7 +98,7 @@ App::Pinto::Command::init - create a new repository
 
 =head1 VERSION
 
-version 0.065_01
+version 0.065_02
 
 =head1 SYNOPSIS
 
@@ -127,16 +126,6 @@ Defaults to C<master>.
 A brief description of the initial stack.  Defaults to "the initial
 stack".  This option is only allowed if the C<STACK> argument is
 given.
-
-=item --log-level=LEVEL
-
-Sets the minimum level for the repository log file.  Valid C<LEVEL>s
-are C<debug>, C<info>, C<notice>, C<warning>, or C<error>.  The
-default is C<notice>.
-
-Beware that lowering the log level may seriously degrade performance.
-You can change this property at any time by editing the repository
-configuration file at F<REPOSITORY_ROOT/.pinto/config/pinto.ini>.
 
 =item --no-default
 

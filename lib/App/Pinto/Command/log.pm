@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.065_01'; # VERSION
+our $VERSION = '0.065_02'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -34,8 +34,6 @@ sub validate_args {
 
     $self->usage_error('Multiple arguments are not allowed') if @{ $args } > 1;
 
-    $opts->{no_color} = $self->app->global_options->{no_color};
-
     $opts->{stack} = $args->[0] if $args->[0];
 
     return 1;
@@ -57,7 +55,7 @@ App::Pinto::Command::log - show the revision logs of a stack
 
 =head1 VERSION
 
-version 0.065_01
+version 0.065_02
 
 =head1 SYNOPSIS
 

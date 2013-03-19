@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.065_01'; # VERSION
+our $VERSION = '0.065_02'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ sub opt_spec {
         [ 'local-lib|l=s'           => 'install into a local lib directory'           ],
         [ 'local-lib-contained|L=s' => 'install into a contained local lib directory' ],
         [ 'message|m=s'             => 'Message to describe the change'               ],
-        [ 'pull'                    => 'pull missing prereqs onto the stack first'    ],
+        [ 'do-pull'                 => 'pull missing prereqs onto the stack first'    ],
         [ 'stack|s=s'               => 'Use the index for this stack'                 ],
 
     );
@@ -72,7 +72,7 @@ App::Pinto::Command::install - install stuff from the repository
 
 =head1 VERSION
 
-version 0.065_01
+version 0.065_02
 
 =head1 SYNOPSIS
 
