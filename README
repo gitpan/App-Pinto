@@ -2,7 +2,7 @@ NAME
     App::Pinto - Command-line driver for Pinto
 
 VERSION
-    version 0.065_02
+    version 0.065_03
 
 DESCRIPTION
     App::Pinto is the command-line driver for Pinto. It is just a front-end.
@@ -77,7 +77,7 @@ SUPPORT
       git clone git://github.com/thaljef/App-Pinto.git
 
 AUTHOR
-    Jeffrey Thalhammer <jeff@imaginative-software.com>
+    Jeffrey Ryan Thalhammer <jeff@stratopan.com>
 
 COPYRIGHT AND LICENSE
     This software is copyright (c) 2012 by Imaginative Software Systems.

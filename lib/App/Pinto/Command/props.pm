@@ -13,7 +13,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.065_02'; # VERSION
+our $VERSION = '0.065_03'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ __END__
 
 =pod
 
-=for :stopwords Jeffrey Thalhammer Imaginative Software Systems
+=for :stopwords Jeffrey Ryan Thalhammer Imaginative Software Systems
 
 =head1 NAME
 
@@ -58,7 +58,7 @@ App::Pinto::Command::props - show or set stack properties
 
 =head1 VERSION
 
-version 0.065_02
+version 0.065_03
 
 =head1 SYNOPSIS
 
@@ -109,9 +109,35 @@ internal use, SO DO NOT CREATE OR CHANGE THEM.
 
 =back
 
+=head1 SUPPORTED PROPERTIES
+
+The following properties are supported for each stack:
+
+=over 4
+
+=item description
+
+A description of the stack, usually to inform users of the application
+and/or environment that the stack is intended for.  For a new stack, 
+defaults to "The STACK_NAME stack".  For a copied stack, defaults to 
+"Copy of stack STACK_NAME".
+
+=item target_perl_version
+
+The version of perl that this stack is targeted at.  This is used
+to determine whether a particular package is satisfied by the perl
+core and therefore does not need to be added to the stack.
+
+It must be a version string or number for an existing perl release, 
+and cannot be higher than the version of perl that you are running 
+pinto.  It defaults to the version of perl you were using to 
+run pinto when you created the stack.
+
+=back
+
 =head1 AUTHOR
 
-Jeffrey Thalhammer <jeff@imaginative-software.com>
+Jeffrey Ryan Thalhammer <jeff@stratopan.com>
 
 =head1 COPYRIGHT AND LICENSE
 

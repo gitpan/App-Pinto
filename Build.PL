@@ -20,10 +20,10 @@ my %module_build_args = (
   },
   "dist_abstract" => "Command-line driver for Pinto",
   "dist_author" => [
-    "Jeffrey Thalhammer <jeff\@imaginative-software.com>"
+    "Jeffrey Ryan Thalhammer <jeff\@stratopan.com>"
   ],
   "dist_name" => "App-Pinto",
-  "dist_version" => "0.065_02",
+  "dist_version" => "0.065_03",
   "license" => "perl",
   "module_name" => "App::Pinto",
   "recommends" => {},
@@ -33,9 +33,9 @@ my %module_build_args = (
     "Class::Load" => 0,
     "Encode" => 0,
     "IO::String" => 0,
-    "Pinto" => "0.065_03",
-    "Pinto::Constants" => "0.065_02",
-    "Pinto::Util" => "0.065_02",
+    "Pinto" => "0.065_04",
+    "Pinto::Constants" => "0.065_03",
+    "Pinto::Util" => "0.065_03",
     "Pod::Usage" => 0,
     "Term::Prompt" => 0,
     "base" => 0,

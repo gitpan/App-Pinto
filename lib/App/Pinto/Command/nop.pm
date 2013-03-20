@@ -1,6 +1,6 @@
-package App::Pinto::Command::nop;
+# ABSTRACT: do nothing
 
-# ABSTRACT: initialize Pinto and exit
+package App::Pinto::Command::nop;
 
 use strict;
 use warnings;
@@ -11,7 +11,7 @@ use base 'App::Pinto::Command';
 
 #------------------------------------------------------------------------------
 
-our $VERSION = '0.065_02'; # VERSION
+our $VERSION = '0.065_03'; # VERSION
 
 #------------------------------------------------------------------------------
 
@@ -43,15 +43,15 @@ __END__
 
 =pod
 
-=for :stopwords Jeffrey Thalhammer Imaginative Software Systems
+=for :stopwords Jeffrey Ryan Thalhammer Imaginative Software Systems
 
 =head1 NAME
 
-App::Pinto::Command::nop - initialize Pinto and exit
+App::Pinto::Command::nop - do nothing
 
 =head1 VERSION
 
-version 0.065_02
+version 0.065_03
 
 =head1 SYNOPSIS
 
@@ -79,7 +79,7 @@ Sleep for N seconds before releasing the lock and exiting.  Default is 0.
 
 =head1 AUTHOR
 
-Jeffrey Thalhammer <jeff@imaginative-software.com>
+Jeffrey Ryan Thalhammer <jeff@stratopan.com>
 
 =head1 COPYRIGHT AND LICENSE
 
