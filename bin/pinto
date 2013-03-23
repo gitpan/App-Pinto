@@ -1,21 +1,37 @@
 #!/usr/bin/env perl
 
-# ABSTRACT: manage a Pinto repository
+# ABSTRACT: Curate a custom repository of Perl modules
 # PODNAME: pinto
+
+#-----------------------------------------------------------------------------
 
 use strict;
 use warnings;
 
 #-----------------------------------------------------------------------------
 
-our $VERSION = '0.065_03'; # VERSION
+our $VERSION = '0.065_04'; # VERSION
 
 #-----------------------------------------------------------------------------
 
-use App::Pinto;
-exit App::Pinto->run;
+my $home_var = 'PINTO_HOME';
+my $home_dir = $ENV{$home_var};
+
+if ($home_dir) {
+	die "$home_var ($home_dir) does not exist!\n" unless -e $home_dir;
+	eval qq{use lib '$home_dir'; 1} or die $@; ## no critic (Eval)
+}
+
+unless ( eval {require App::Pinto; 1} ) {
+	die $home_dir ? $@ : $@ . "Do you need to set $home_var?\n";
+}
 
 #-----------------------------------------------------------------------------
+
+exit App::Pinto->run if not caller;
+
+#-----------------------------------------------------------------------------
+1;
 
 __END__
 
@@ -25,11 +41,11 @@ __END__
 
 =head1 NAME
 
-pinto - manage a Pinto repository
+pinto - Curate a custom repository of Perl modules
 
 =head1 VERSION
 
-version 0.065_03
+version 0.065_04
 
 =head1 SYNOPSIS
 
@@ -122,6 +138,78 @@ if using a remote repository.  Defaults to your current login.
 
 Display more diagnostic messages.  This switch can be repeated multiple
 times for greater effect.  Diagnostic messages are always sent to STDERR.
+
+=back
+
+=head1 ENVIRONMENT VARIABLES
+
+The following environment variables influence the behavior of pinto:
+
+=over 4
+
+=item C<PINTO_HOME>
+
+If you have installed pinto as a stand-alone application, then C<PINTO_HOME>
+should point to the directory where you installed it.  If C<PINTO_HOME> 
+is set at all, then it must point to a valid directory or pinto will throw
+an exception.  Please see L<Pinto::Manual::Installing> for details on 
+stand-alone installations.
+
+=item C<PINTO_REPOSITORY_ROOT>
+
+Sets the default path or URL of the pinto repository, if the C<--root>
+is not specified.  The C<--root> is required for almost all commands.
+So if you usually only work with one repository, then setting this
+can save you quite a bit of typing.
+
+=item C<PINTO_EDITOR>
+
+Sets the path to editor application that will be used to compose log
+messages.  If not set, defaults to C<VISUAL> or C<EDITOR>.  At least
+one of these variables must be defined.
+
+=item C<PINTO_NO_COLOR>
+
+=item C<PINTO_NO_COLOUR>
+
+If set to a true value, suppresses color in all command output.
+
+=item C<PINTO_COLORS>
+
+=item C<PINTO_COLOURS>
+
+A comma-separated list of exactly three color names.  Any name supported 
+by L<Term::ANSIColor> is allowed.  These will be the colors that pinto 
+uses to colorize various output.  For example:
+
+  PINTO_COLORS='red, light blue, green on_white'
+
+Listing too many or too few colors will cause an exception, as will using 
+an invalid color name.
+
+=item C<PINTO_USERNAME>
+
+Sets the default username when C<--username> is not specified.  This is only 
+used for authentication with a L<pintod> server.  Defaults to your current
+shell username.
+
+=item C<PINTO_AUTHOR_ID>
+
+Sets the default author identity when the C<--author> option is not specified
+(currently, only used by the L<add|App::Pinto::Commmand::add>) command.  Defaults 
+to your current shell username.  By PAUSE convention, all author id's are forced 
+to uppercase.
+
+=item C<PINTO_PAGER>
+
+Sets the path to the pager application that will be used to paginate output from
+each command.  Defaults to C<PAGER>.  If none of these are set, then no pager 
+is used.
+
+=item C<PINTO_DEBUG>
+
+If set to 1, pinto will emit more diagnostic messages to STDERR.  If set to 2, 
+pinto will emit even more diagnostic messages.
 
 =back
 

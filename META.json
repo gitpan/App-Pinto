@@ -44,7 +44,7 @@
             "Class::Load" : "0",
             "Encode" : "0",
             "IO::String" : "0",
-            "Pinto" : "0.065_04",
+            "Pinto" : "0.065_06",
             "Pinto::Constants" : "0.065_03",
             "Pinto::Util" : "0.065_03",
             "Pod::Usage" : "0",
@@ -69,123 +69,123 @@
    "provides" : {
       "App::Pinto" : {
          "file" : "lib/App/Pinto.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command" : {
          "file" : "lib/App/Pinto/Command.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::add" : {
          "file" : "lib/App/Pinto/Command/add.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::clean" : {
          "file" : "lib/App/Pinto/Command/clean.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::copy" : {
          "file" : "lib/App/Pinto/Command/copy.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::default" : {
          "file" : "lib/App/Pinto/Command/default.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::delete" : {
          "file" : "lib/App/Pinto/Command/delete.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::diff" : {
          "file" : "lib/App/Pinto/Command/diff.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::init" : {
          "file" : "lib/App/Pinto/Command/init.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::install" : {
          "file" : "lib/App/Pinto/Command/install.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::kill" : {
          "file" : "lib/App/Pinto/Command/kill.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::list" : {
          "file" : "lib/App/Pinto/Command/list.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::lock" : {
          "file" : "lib/App/Pinto/Command/lock.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::log" : {
          "file" : "lib/App/Pinto/Command/log.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::manual" : {
          "file" : "lib/App/Pinto/Command/manual.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::migrate" : {
          "file" : "lib/App/Pinto/Command/migrate.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::new" : {
          "file" : "lib/App/Pinto/Command/new.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::nop" : {
          "file" : "lib/App/Pinto/Command/nop.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::pin" : {
          "file" : "lib/App/Pinto/Command/pin.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::props" : {
          "file" : "lib/App/Pinto/Command/props.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::pull" : {
          "file" : "lib/App/Pinto/Command/pull.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::register" : {
          "file" : "lib/App/Pinto/Command/register.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::rename" : {
          "file" : "lib/App/Pinto/Command/rename.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::stacks" : {
          "file" : "lib/App/Pinto/Command/stacks.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::statistics" : {
          "file" : "lib/App/Pinto/Command/statistics.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::unlock" : {
          "file" : "lib/App/Pinto/Command/unlock.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::unpin" : {
          "file" : "lib/App/Pinto/Command/unpin.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::unregister" : {
          "file" : "lib/App/Pinto/Command/unregister.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::verify" : {
          "file" : "lib/App/Pinto/Command/verify.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       },
       "App::Pinto::Command::version" : {
          "file" : "lib/App/Pinto/Command/version.pm",
-         "version" : "0.065_03"
+         "version" : "0.065_04"
       }
    },
    "release_status" : "testing",
@@ -199,6 +199,6 @@
          "web" : "https://github.com/thaljef/App-Pinto"
       }
    },
-   "version" : "0.065_03"
+   "version" : "0.065_04"
 }
 

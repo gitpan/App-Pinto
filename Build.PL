@@ -23,7 +23,7 @@ my %module_build_args = (
     "Jeffrey Ryan Thalhammer <jeff\@stratopan.com>"
   ],
   "dist_name" => "App-Pinto",
-  "dist_version" => "0.065_03",
+  "dist_version" => "0.065_04",
   "license" => "perl",
   "module_name" => "App::Pinto",
   "recommends" => {},
@@ -33,7 +33,7 @@ my %module_build_args = (
     "Class::Load" => 0,
     "Encode" => 0,
     "IO::String" => 0,
-    "Pinto" => "0.065_04",
+    "Pinto" => "0.065_06",
     "Pinto::Constants" => "0.065_03",
     "Pinto::Util" => "0.065_03",
     "Pod::Usage" => 0,
